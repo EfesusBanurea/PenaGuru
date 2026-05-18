@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PenaGuru - Sistem Penilaian & Rekap Nilai Digital</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind & Flowbite & SheetJS Style -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-white to-blue-50 text-gray-900 antialiased min-h-screen flex flex-col dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 dark:text-slate-100 transition-colors duration-300">
+    <!-- Navbar -->
+    <nav class="bg-blue-900/95 backdrop-blur-md border-b border-white/20 shadow-lg z-10 sticky top-0">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <span class="self-center text-2xl font-extrabold whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-white tracking-tight flex items-center gap-2">
+                <svg class="w-7 h-7 text-blue-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd"/>
+                </svg>
+                PenaGuru
+            </span>
+            <div class="flex items-center gap-3">
+                <button id="btn-open-project" class="flex items-center gap-2 text-white/90 hover:text-white border border-white/30 hover:bg-white/10 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 transition-all">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19V6a1 1 0 0 1 1-1h4.032a1 1 0 0 1 .768.36l1.9 2.28a1 1 0 0 0 .768.36H16a1 1 0 0 1 1 1v1M3 19l3-8h15l-3 8H3Z"/>
+                    </svg>
+                    Buka Proyek
+                </button>
+                <input type="file" id="input-open-project" accept=".json" class="hidden">
+                <button id="btn-save-project" class="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-bold rounded-lg text-sm px-4 py-2 shadow-md transition-all transform hover:scale-105">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4-4-4"/>
+                    </svg>
+                    Backup
+                </button>
+                <div class="h-6 border-l border-white/20 mx-2 hidden md:block"></div>
+                <!-- Theme Toggle Button -->
+                <button id="btn-theme-toggle" type="button" class="hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-blue-800 rounded-lg text-sm p-2 transition-colors mr-1" title="Ubah Tema (Gelap/Terang)">
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-300 filter drop-shadow-[0_0_8px_rgba(253,224,71,0.8)]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.46 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="theme-toggle-dark-icon" class="w-5 h-5 text-yellow-100 filter drop-shadow-[0_0_6px_rgba(254,240,138,0.6)]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+                <div id="btn-open-profile" class="cursor-pointer group flex-col items-end hidden md:flex hover:bg-white/10 px-3 py-1.5 rounded-lg transition-colors border border-transparent hover:border-white/20" title="Ubah Profil">
+                    <span class="text-blue-100 font-medium text-sm flex items-center gap-1 group-hover:text-white">
+                        Halo, <span id="profile-name-display">Ibu R. Bangun S.Pd</span>
+                        <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/></svg>
+                    </span>
+                    <span class="text-blue-200 text-xs mt-0.5 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z" clip-rule="evenodd"/>
+                        </svg>
+                        <span id="profile-mapel-display" class="font-bold text-white">Matematika</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-screen-xl mx-auto p-4 mt-6 flex-grow w-full">
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div class="w-full md:w-auto flex justify-between items-start gap-4 flex-grow">
+                <div class="min-w-0 flex-grow">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-indigo-800 dark:from-blue-400 dark:to-indigo-300 mb-2 tracking-tight">Kelola Nilai Murid</h1>
+                    <p class="text-gray-600 dark:text-slate-350 text-sm sm:text-lg lg:text-xl font-bold leading-relaxed">Buku kerja digital yang aman, rapi, cepat, dan efisien.</p>
+                </div>
+                
+                <div id="profile-mobile-card" class="md:hidden flex items-center gap-1.5 bg-blue-50/70 dark:bg-slate-800/80 border border-blue-100 dark:border-slate-700 px-3 py-1.5 rounded-xl text-[10px] font-bold text-blue-900 dark:text-blue-300 shadow-sm transition-all duration-300 max-w-[170px] flex-shrink-0 mt-1 cursor-pointer hover:bg-blue-100/60 dark:hover:bg-slate-700/80 active:scale-95 active:bg-blue-200/50" title="Klik untuk Ubah Profil Guru">
+                    <span class="flex items-center justify-center w-5 h-5 bg-blue-100 dark:bg-slate-700 rounded-full flex-shrink-0">🎓</span>
+                    <div class="min-w-0 flex flex-col">
+                        <span id="profile-name-mobile-display" class="font-extrabold text-gray-900 dark:text-slate-100 leading-none truncate">Ibu R. Bangun S.Pd</span>
+                        <span id="profile-mapel-mobile-display" class="font-medium text-gray-500 dark:text-slate-400 text-[8px] mt-0.5 leading-none truncate">Matematika</span>
+                    </div>
+                    <span class="text-blue-600 dark:text-blue-400 flex-shrink-0 ml-1">
+                        <svg class="w-3.5 h-3.5 pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/></svg>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="flex flex-col gap-3.5 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-md border border-gray-200 dark:border-slate-700 w-full md:w-[420px] flex-shrink-0">
+                <!-- Dropdown Row: side-by-side on mobile and desktop -->
+                <div class="flex gap-3 w-full">
+                    <div class="flex flex-col gap-1 flex-shrink-0" style="width: 155px !important; min-width: 155px !important;">
+                        <label class="text-[10px] font-bold text-gray-400 dark:text-slate-400 uppercase tracking-widest pl-1">Tahun Ajaran</label>
+                        <select id="year-dropdown" class="h-11 bg-blue-50 border border-blue-200 text-blue-900 dark:bg-slate-700 dark:border-slate-600 dark:text-blue-300 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block px-3 font-bold shadow-sm cursor-pointer w-full hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors" style="width: 100% !important; min-width: 100% !important;" title="Tahun Ajaran">
+                            <!-- JS -->
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1 flex-grow min-w-0" style="min-width: 215px !important;">
+                        <label class="text-[10px] font-bold text-gray-400 dark:text-slate-400 uppercase tracking-widest pl-1">Kelas Aktif</label>
+                        <select id="class-dropdown" class="h-11 bg-gray-50 border border-gray-200 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block px-3 font-bold shadow-sm cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors" style="width: 100% !important; min-width: 100% !important;" title="Kelas Aktif">
+                            <!-- JS -->
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Buttons Row: compact bottom buttons in one container -->
+                <div class="flex gap-2 items-center w-full">
+                    <button id="btn-delete-class" class="h-11 w-11 flex-shrink-0 flex items-center justify-center text-red-600 bg-red-50 hover:bg-red-600 hover:text-white border border-red-100 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-900 dark:hover:text-white focus:ring-4 focus:ring-red-100 font-medium rounded-xl focus:outline-none shadow-sm transition-all" title="Hapus Kelas Aktif">
+                        <svg class="w-5 h-5 pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/></svg>
+                    </button>
+                    <button id="btn-lock-class" class="h-11 w-11 flex-shrink-0 flex items-center justify-center text-gray-600 dark:text-slate-300 bg-gray-50 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 border border-gray-200 dark:border-slate-600 focus:ring-4 focus:ring-gray-100 dark:focus:ring-slate-700 font-medium rounded-xl focus:outline-none shadow-sm transition-all" title="Kunci/Buka Kunci Kelas">
+                        <svg id="lock-icon" class="w-5 h-5 pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10V7a4 4 0 1 1 8 0v3M5 10h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z"/>
+                        </svg>
+                    </button>
+                    <button id="btn-edit-class" class="h-11 w-11 flex-shrink-0 flex items-center justify-center text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/20 hover:bg-blue-200 dark:hover:bg-blue-900 border border-blue-250 dark:border-blue-900/50 focus:ring-4 focus:ring-blue-100 font-medium rounded-xl focus:outline-none shadow-sm transition-all" title="Edit Detail Kelas">
+                        <svg class="w-5 h-5 pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/></svg>
+                    </button>
+                    <button id="btn-open-class-modal" class="h-11 flex-grow text-white bg-blue-950 hover:bg-blue-900 dark:bg-blue-705 dark:hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-semibold rounded-xl text-xs px-4 focus:outline-none shadow-sm transition-all flex items-center justify-center gap-2 whitespace-nowrap">
+                        <svg class="w-4 h-4 text-white pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 5v14m-7-7h14"/>
+                        </svg>
+                        Buat Kelas Baru
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 mb-10 dark:bg-slate-800 dark:border-slate-700 transition-colors">
+            <!-- Lock Warning Banner -->
+            <div id="lock-warning-banner" class="hidden p-4 mb-4 text-sm text-yellow-800 rounded-xl bg-yellow-50 border border-yellow-200 dark:bg-yellow-950/30 dark:text-yellow-400 dark:border-yellow-900 shadow-sm flex items-center gap-3" role="alert">
+                <svg class="flex-shrink-0 inline w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="font-bold">Kelas Terkunci!</span> Buka gembok di bagian atas untuk mengedit nilai.
+            </div>
+
+            <!-- Mini Dashboard Statistik: side-by-side always -->
+            <div id="class-stats-dashboard" class="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
+                <!-- Card 1: Rata-rata Kelas -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800/80 dark:to-blue-950/30 p-2.5 sm:p-5 rounded-xl sm:rounded-2xl border border-blue-100 dark:border-blue-500/20 shadow-sm flex items-center gap-2 sm:gap-4 transition-all hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 bg-blue-500 rounded-lg sm:rounded-xl flex-shrink-0 flex items-center justify-center text-white shadow-lg shadow-blue-200 dark:shadow-none dark:bg-blue-600 dark:shadow-[0_0_15px_rgba(59,130,246,0.4)]">
+                        <svg class="w-4.5 h-4.5 sm:w-6 sm:h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15v4m6-6v6m6-10v10m6-16v16"/></svg>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-[9px] sm:text-xs font-bold text-blue-500 dark:text-blue-400 uppercase tracking-wider sm:tracking-widest leading-tight truncate">Rata-rata</p>
+                        <h3 id="stat-class-average" class="text-base sm:text-2xl font-black text-blue-900 dark:text-blue-100 mt-0.5 sm:mt-1">0</h3>
+                    </div>
+                </div>
+                <!-- Card 2: Tuntas KKM -->
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-slate-800/80 dark:to-emerald-950/30 p-2.5 sm:p-5 rounded-xl sm:rounded-2xl border border-emerald-100 dark:border-emerald-500/20 shadow-sm flex items-center gap-2 sm:gap-4 transition-all hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 bg-emerald-500 rounded-lg sm:rounded-xl flex-shrink-0 flex items-center justify-center text-white shadow-lg shadow-emerald-200 dark:shadow-none dark:bg-emerald-600 dark:shadow-[0_0_15px_rgba(16,185,129,0.4)]">
+                        <svg class="w-4.5 h-4.5 sm:w-6 sm:h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 5 5L20 7"/></svg>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-[9px] sm:text-xs font-bold text-emerald-500 dark:text-emerald-400 uppercase tracking-wider sm:tracking-widest leading-tight truncate">Tuntas KKM</p>
+                        <h3 id="stat-class-pass" class="text-base sm:text-2xl font-black text-emerald-900 dark:text-emerald-100 mt-0.5 sm:mt-1">0% <span class="text-[9px] sm:text-xs font-semibold text-emerald-600 dark:text-emerald-450 block sm:inline" id="stat-class-pass-detail">(0/0)</span></h3>
+                    </div>
+                </div>
+                <!-- Card 3: Remedial -->
+                <div class="bg-gradient-to-br from-red-50 to-rose-50 dark:from-slate-800/80 dark:to-rose-950/30 p-2.5 sm:p-5 rounded-xl sm:rounded-2xl border border-red-100 dark:border-rose-500/20 shadow-sm flex items-center gap-2 sm:gap-4 transition-all hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(244,63,94,0.15)]">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 bg-rose-500 rounded-lg sm:rounded-xl flex-shrink-0 flex items-center justify-center text-white shadow-lg shadow-rose-200 dark:shadow-none dark:bg-rose-600 dark:shadow-[0_0_15px_rgba(244,63,94,0.4)]">
+                        <svg class="w-4.5 h-4.5 sm:w-6 sm:h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-[9px] sm:text-xs font-bold text-rose-500 dark:text-rose-400 uppercase tracking-wider sm:tracking-widest leading-tight truncate">Remedial</p>
+                        <h3 id="stat-class-fail" class="text-base sm:text-2xl font-black text-rose-900 dark:text-rose-100 mt-0.5 sm:mt-1">0% <span class="text-[9px] sm:text-xs font-semibold text-rose-600 dark:text-rose-455 block sm:inline" id="stat-class-fail-detail">(0/0)</span></h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="flex flex-wrap items-center gap-3 mb-6 bg-gray-50 dark:bg-slate-700/50 p-3 rounded-xl border border-gray-200 dark:border-slate-700">
+                <button id="btn-undo" class="flex items-center gap-2 text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 focus:outline-none hover:bg-gray-100 dark:hover:bg-slate-700 focus:ring-4 focus:ring-gray-100 dark:focus:ring-slate-700 font-medium rounded-lg text-sm px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm" title="Batal (Undo)">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9h13a5 5 0 0 1 0 10H7M3 9l4-4M3 9l4 4"/>
+                    </svg>
+                    Undo
+                </button>
+                <button id="btn-redo" class="flex items-center gap-2 text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 focus:outline-none hover:bg-gray-100 dark:hover:bg-slate-700 focus:ring-4 focus:ring-gray-100 dark:focus:ring-slate-700 font-medium rounded-lg text-sm px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm" title="Ulangi (Redo)">
+                    Redo
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 9H8a5 5 0 0 0 0 10h9m4-10-4-4m4 4-4 4"/>
+                    </svg>
+                </button>
+                
+                <div class="hidden md:block flex-grow"></div>
+                
+                <button id="btn-open-student-modal" class="flex items-center gap-2 text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 focus:outline-none hover:bg-gray-100 dark:hover:bg-slate-700 focus:ring-4 focus:ring-gray-100 dark:focus:ring-slate-700 font-medium rounded-lg text-sm px-5 py-2 shadow-sm transition-colors">
+                    <svg class="w-4 h-4 text-gray-600 dark:text-slate-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4m-2 2v-4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                    </svg>
+                    Tambah Murid Baru
+                </button>
+                <button id="btn-open-import-modal" class="flex items-center gap-2 text-emerald-900 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 focus:outline-none hover:bg-emerald-100 dark:hover:bg-emerald-950/50 focus:ring-4 focus:ring-emerald-100 dark:focus:ring-emerald-950 font-medium rounded-lg text-sm px-5 py-2 shadow-sm transition-colors" title="Import Murid dari Excel/CSV">
+                    <svg class="w-4 h-4 text-emerald-700 dark:text-emerald-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v13m0 0-4-4m4 4 4-4m-9 4h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2Z"/>
+                    </svg>
+                    Import Murid
+                </button>
+                <button id="btn-add-harian" class="flex items-center gap-2 text-blue-900 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 focus:outline-none hover:bg-blue-100 dark:hover:bg-blue-950/40 focus:ring-4 focus:ring-blue-100 font-semibold rounded-lg text-sm px-5 py-2 shadow-sm transition-colors">
+                    <svg class="w-4 h-4 text-blue-900 dark:text-blue-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                    </svg>
+                    Tambah Ulangan Harian
+                </button>
+                <button id="btn-settings" class="text-gray-700 dark:text-slate-300 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-300 dark:border-slate-600 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-4 py-2 shadow-sm transition-colors flex items-center gap-2 ml-2">
+                    ⚙️ Atur Bobot Nilai
+                </button>
+            </div>
+            
+            <div id="class-dates-info" class="hidden"></div>
+
+            <!-- Table Container with strict w-full max-w-full overflow-hidden -->
+            <div class="relative w-full max-w-full shadow-md sm:rounded-xl border border-gray-200 dark:border-slate-700 mb-6 bg-white dark:bg-slate-800 overflow-hidden">
+                <!-- Search Bar -->
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-3 p-4 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
+                    <!-- Search Input & Sort Dropdown side-by-side always -->
+                    <div class="relative w-full md:w-2/3 flex flex-row gap-2 items-center">
+                        <div class="relative flex-grow">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-slate-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                </svg>
+                            </div>
+                            <input type="text" id="input-search-student" class="bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-slate-100 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-9 p-2 shadow-sm dark:placeholder-slate-400" placeholder="Cari NIS atau Nama...">
+                        </div>
+                        <select id="sort-dropdown" class="bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-slate-100 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 shadow-sm cursor-pointer w-auto max-w-[130px] flex-shrink-0" title="Urutkan Data">
+                            <option value="default">-- Urutkan --</option>
+                            <option value="name_asc">Nama (A-Z)</option>
+                            <option value="name_desc">Nama (Z-A)</option>
+                            <option value="score_desc">Nilai Tertinggi</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Ketua Kelas Dropdown aligned to the right side -->
+                    <div class="w-full md:w-auto flex justify-end">
+                        <div class="flex items-center gap-2 bg-yellow-50 dark:bg-yellow-950/20 pl-3 pr-1 py-1 rounded-xl border border-yellow-200 dark:border-yellow-900/50">
+                            <label class="text-[11px] font-extrabold text-yellow-700 dark:text-yellow-500 uppercase tracking-wider whitespace-nowrap">👑 Ketua Kelas:</label>
+                            <select id="ketua-dropdown" class="bg-white dark:bg-slate-800 border border-yellow-300 dark:border-yellow-600/50 text-yellow-900 dark:text-yellow-200 text-xs rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block p-1.5 font-bold shadow-sm cursor-pointer min-w-[130px] max-w-[180px]" title="Pilih Ketua Kelas">
+                                <option value="">-- Pilih Ketua --</option>
+                                <!-- JS -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto w-full max-w-full">
+                    <table id="grading-table" class="w-full text-sm text-left text-gray-500 dark:text-slate-400">
+                    <thead id="table-head" class="text-sm font-bold text-gray-800 dark:text-slate-200 uppercase bg-gray-100 dark:bg-slate-700 border-b-2 border-gray-300 dark:border-slate-700">
+                        <!-- JS -->
+                    </thead>
+                    <tbody id="table-body" class="divide-y divide-gray-200 dark:divide-slate-700">
+                        <!-- JS -->
+                    </tbody>
+                </table>
+                </div>
+                <!-- Action Footer -->
+                <div class="p-4 border-t border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50 flex justify-end gap-3">
+                    <button id="btn-save" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-bold rounded-lg text-sm px-6 py-2.5 text-center transition-all shadow-sm flex items-center gap-2">
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 10V4a1 1 0 0 0-1-1H9.914a1 1 0 0 0-.707.293L5.293 7.207A1 1 0 0 0 5 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2M10 3v4a1 1 0 0 1-1 1H5m5 6h9m0 0-2-2m2 2-2 2"/>
+                        </svg>
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Legend -->
+            <div class="flex p-4 mb-2 text-sm text-blue-800 dark:text-blue-300 rounded-xl bg-blue-50 dark:bg-slate-700/30 border border-blue-100 dark:border-blue-950 shadow-sm" role="alert">
+                <svg class="flex-shrink-0 inline w-5 h-5 me-3 mt-[2px] text-blue-600 dark:text-blue-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <div>
+                    <span class="font-bold text-base text-blue-900 dark:text-blue-200">Petunjuk Pengisian & Rumus Nilai Akhir:</span>
+                    <ul class="mt-2 list-disc list-inside space-y-1 text-blue-800 dark:text-blue-300/90">
+                        <li>Klik langsung ke dalam kotak di tabel untuk mengetik nilai angka.</li>
+                        <li id="legend-formula"><strong>Nilai Akhir</strong> = (Rata-rata Harian x 40%) + (UTS x 30%) + (UAS x 30%)</li>
+                        <li class="font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/20 inline-block px-2 py-0.5 rounded border border-red-200 dark:border-red-900/50 mt-2">Perhatian: Nilai Akhir di bawah 75 (KKM) akan otomatis ditebalkan dan berwarna merah.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <!-- Modal Kelas -->
+    <div id="modal-class" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
+        <div class="relative p-4 w-full max-w-md max-h-full m-auto mt-20">
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
+                <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
+                        Buat Kelas Baru
+                    </h3>
+                    <button type="button" id="close-class-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-5">
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Tingkat</label>
+                                <select id="input-class-grade" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer">
+                                    <option value="VII">VII (Tujuh)</option>
+                                    <option value="VIII">VIII (Delapan)</option>
+                                    <option value="IX">IX (Sembilan)</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Rombel / Grup</label>
+                                <input type="text" id="input-class-group" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: A, B, 1, 2, atau Unggulan" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Tahun Ajaran</label>
+                            <div class="flex items-center justify-between gap-3">
+                                <input type="number" id="input-class-year1" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: 2024" required>
+                                <span class="font-extrabold text-gray-400 dark:text-slate-500 text-xl">/</span>
+                                <input type="number" id="input-class-year2" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: 2025" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Jumlah Ulangan Harian Awal</label>
+                            <input type="number" id="input-class-harian" value="2" min="1" max="10" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors" required>
+                            <p class="mt-1.5 text-xs text-gray-500 dark:text-slate-400">Anda tetap bisa menambahkannya nanti lewat tabel.</p>
+                        </div>
+                        <button id="btn-submit-class" class="w-full text-white bg-blue-900 hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-3.5 text-center transition-colors shadow-md mt-4">Buat Kelas Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit Detail Kelas -->
+    <div id="modal-edit-class" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
+        <div class="relative p-4 w-full max-w-md max-h-full m-auto mt-20">
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
+                <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
+                        Ubah Detail Kelas
+                    </h3>
+                    <button type="button" id="close-edit-class-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-5">
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Tingkat</label>
+                                <select id="input-edit-class-grade" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer">
+                                    <option value="VII">VII (Tujuh)</option>
+                                    <option value="VIII">VIII (Delapan)</option>
+                                    <option value="IX">IX (Sembilan)</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Rombel / Grup</label>
+                                <input type="text" id="input-edit-class-group" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: A, B, 1, 2, atau Unggulan" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Tahun Ajaran</label>
+                            <div class="flex items-center justify-between gap-3">
+                                <input type="number" id="input-edit-class-year1" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: 2024" required>
+                                <span class="font-extrabold text-gray-400 dark:text-slate-500 text-xl">/</span>
+                                <input type="number" id="input-edit-class-year2" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: 2025" required>
+                            </div>
+                        </div>
+                        <button id="btn-submit-edit-class" class="w-full text-white bg-blue-900 hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-3.5 text-center transition-colors shadow-md mt-4">Simpan Perubahan Kelas</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tambah Murid -->
+    <div id="modal-student" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
+        <div class="relative p-4 w-full max-w-md max-h-full m-auto mt-20">
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
+                <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
+                        Tambah Murid Baru
+                    </h3>
+                    <button type="button" id="close-student-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-5">
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">NIS</label>
+                                <input type="text" id="input-student-nis" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Ketik NIS..." required>
+                            </div>
+                            <div class="w-1/3">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Jenis Kelamin</label>
+                                <select id="input-student-jk" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer" required>
+                                    <option value="L">L (Laki-laki)</option>
+                                    <option value="P">P (Perempuan)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Nama Lengkap Murid</label>
+                            <input type="text" id="input-student-name" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Ketik nama lengkap..." required>
+                        </div>
+                        <button id="btn-submit-student" class="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-bold rounded-lg text-base px-5 py-3.5 text-center transition-colors shadow-md mt-4 flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                            </svg>
+                            Simpan ke Daftar Kelas
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit Data Murid -->
+    <div id="modal-edit-student" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
+        <div class="relative p-4 w-full max-w-md max-h-full m-auto mt-20">
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
+                <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
+                        Ubah Data Murid
+                    </h3>
+                    <button type="button" id="close-edit-student-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-5">
+                        <input type="hidden" id="input-edit-student-id">
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">NIS</label>
+                                <input type="text" id="input-edit-student-nis" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Ketik NIS..." required>
+                            </div>
+                            <div class="w-1/3">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Jenis Kelamin</label>
+                                <select id="input-edit-student-jk" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer" required>
+                                    <option value="L">L (Laki-laki)</option>
+                                    <option value="P">P (Perempuan)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Nama Lengkap Murid</label>
+                            <input type="text" id="input-edit-student-name" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Ketik nama lengkap..." required>
+                        </div>
+                        <button id="btn-submit-edit-student" class="w-full text-white bg-blue-900 hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-3.5 text-center transition-colors shadow-md mt-4 flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5 pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Simpan Perubahan Murid
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Export Excel -->
+    <div id="modal-export" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
+        <div class="relative p-4 w-full max-w-md max-h-full m-auto mt-20">
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
+                <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
+                        Unduh Rekapitulasi Nilai
+                    </h3>
+                    <button type="button" id="close-export-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-5">
+                        <p class="text-gray-500 dark:text-slate-400 text-sm">Pilih Tahun Ajaran untuk mengunduh seluruh data kelas dalam satu file Excel (Setiap kelas akan menjadi <i>sheet</i> terpisah).</p>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Pilih Tahun Ajaran</label>
+                            <select id="select-export-year" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer">
+                                <!-- JS Populated -->
+                            </select>
+                        </div>
+                        <button id="btn-submit-export" class="w-full text-white bg-[#107c41] hover:bg-[#185c37] focus:ring-4 focus:outline-none focus:ring-green-300 font-bold rounded-lg text-base px-5 py-3.5 text-center transition-colors shadow-md mt-4 flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM6.293 14.707a1 1 0 0 1 1.414 0L10 16.586l2.293-1.879a1 1 0 1 1 1.414 1.414L11.414 18l2.293 1.879a1 1 0 0 1-1.414 1.414L10 19.414l-2.293 1.879a1 1 0 1 1-1.414-1.414L8.586 18l-2.293-1.879a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"/>
+                            </svg>
+                            Unduh Excel Sekarang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Atur Bobot -->
+    <div id="modal-weights" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
+        <div class="relative p-4 w-full max-w-md max-h-full m-auto mt-20">
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
+                <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
+                        Atur Bobot Nilai Akhir
+                    </h3>
+                    <button type="button" id="close-weights-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <p class="text-sm text-gray-600 dark:text-slate-400 mb-2">Tentukan persentase untuk rumus Nilai Akhir. <br><span class="font-bold text-red-600 dark:text-red-400">Total ketiganya harus persis 100%.</span></p>
+                        
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Bobot Rata-rata Harian (%)</label>
+                            <input type="number" id="input-weight-harian" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-gray-800 focus:border-gray-800 block w-full p-2.5" min="0" max="100" value="40">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Bobot UTS (%)</label>
+                            <input type="number" id="input-weight-uts" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-gray-800 focus:border-gray-800 block w-full p-2.5" min="0" max="100" value="30">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Bobot UAS (%)</label>
+                            <input type="number" id="input-weight-uas" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-gray-800 focus:border-gray-800 block w-full p-2.5" min="0" max="100" value="30">
+                        </div>
+                        
+                        <div id="weight-error" class="hidden text-red-600 dark:text-red-400 text-sm font-bold bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/50 p-3 rounded">
+                            ❌ Total bobot saat ini: <span id="weight-total-display">100</span>%. Total harus 100%!
+                        </div>
+
+                        <button id="btn-submit-weights" class="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-bold rounded-lg text-base px-5 py-3.5 text-center mt-4 transition-colors">Terapkan Rumus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Profil -->
+    <div id="modal-profile" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
+        <div class="relative p-4 w-full max-w-md max-h-full m-auto mt-20">
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
+                <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
+                        Pengaturan Profil
+                    </h3>
+                    <button type="button" id="close-profile-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Nama Guru / Wali Kelas</label>
+                            <input type="text" id="input-profile-name" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 block w-full p-2.5 dark:placeholder-slate-400" placeholder="Contoh: Ibu R. Bangun S.Pd">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Mata Pelajaran</label>
+                            <input type="text" id="input-profile-mapel" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 block w-full p-2.5 dark:placeholder-slate-400" placeholder="Contoh: Matematika">
+                        </div>
+                        
+                        <button id="btn-submit-profile" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-3.5 text-center mt-4 transition-colors">Simpan Profil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Buttons (Bottom Right) -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-3 z-50">
+        <!-- Print PDF Button -->
+        <button id="btn-print-pdf" class="text-white bg-[#dc2626] hover:bg-[#b91c1c] focus:ring-4 focus:outline-none focus:ring-red-300 font-bold rounded-full text-base px-6 py-4 text-center transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M16.444 18H19a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2.556M17 11V5a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v6h10ZM7 15h10v3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-3Z"/>
+            </svg>
+            Cetak Laporan (PDF)
+        </button>
+        <!-- Export Excel Button -->
+        <button id="btn-export-excel" class="text-white bg-[#107c41] hover:bg-[#185c37] focus:ring-4 focus:outline-none focus:ring-green-300 font-bold rounded-full text-base px-6 py-4 text-center transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM6.293 14.707a1 1 0 0 1 1.414 0L10 16.586l2.293-1.879a1 1 0 1 1 1.414 1.414L11.414 18l2.293 1.879a1 1 0 0 1-1.414 1.414L10 19.414l-2.293 1.879a1 1 0 1 1-1.414-1.414L8.586 18l-2.293-1.879a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"/>
+            </svg>
+            Export ke Excel (.xlsx)
+        </button>
+    </div>
+
+    <!-- Modal Import Siswa -->
+    <div id="modal-import" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
+        <div class="relative p-4 w-full max-w-md max-h-full m-auto mt-20">
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
+                <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
+                        Import Siswa dari Excel/CSV
+                    </h3>
+                    <button type="button" id="close-import-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <p class="text-sm text-gray-500 dark:text-slate-400">
+                            Pilih file Excel (.xlsx, .xls) atau CSV yang berisi daftar siswa.
+                        </p>
+                        
+                        <div class="bg-blue-50 dark:bg-slate-900 border border-blue-200 dark:border-slate-700 p-4 rounded-xl text-xs text-blue-900 dark:text-blue-300">
+                            <strong class="block mb-1 text-sm font-bold">⚠️ Ketentuan Format Kolom:</strong>
+                            <ul class="list-decimal list-inside space-y-1 mt-1">
+                                <li>Kolom A: <strong>NIS</strong> (Nomor Induk Siswa)</li>
+                                <li>Kolom B: <strong>Nama Lengkap Murid</strong></li>
+                                <li>Kolom C: <strong>Jenis Kelamin (L/P)</strong></li>
+                            </ul>
+                            <div class="mt-2.5 text-[10px] text-gray-500 dark:text-slate-400 space-y-1 leading-relaxed">
+                                <p>• Unduh template di bawah yang sudah diformat khusus agar data NIS tidak kehilangan angka nol di depan (misal: 0812).</p>
+                                <p>• Baris petunjuk dan baris <b>CONTOH:</b> pada template akan diabaikan otomatis saat di-import.</p>
+                            </div>
+                            
+                            <!-- Tombol Download Template Excel -->
+                            <div class="mt-3 pt-3 border-t border-blue-200 dark:border-slate-800 flex justify-center">
+                                <button type="button" id="btn-download-template" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-blue-700 bg-blue-100 hover:bg-blue-200 dark:text-blue-300 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-lg transition-colors border border-blue-200 dark:border-slate-700 shadow-sm">
+                                    <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 13V4M12 13 8.5 9.5M12 13l3.5-3.5m-9 9h11a2 2 0 0 0 2-2v-2a1 1 0 0 0-1-1h-14a1 1 0 0 0-1 1v2a2 2 0 0 0 2 2Z"/>
+                                    </svg>
+                                    Unduh Template Excel (.xlsx)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Upload File</label>
+                            <input type="file" id="input-import-file" accept=".xlsx, .xls, .csv" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 p-2">
+                        </div>
+
+                        <button id="btn-submit-import" class="w-full text-white bg-emerald-600 hover:bg-emerald-750 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-bold rounded-lg text-base px-5 py-3.5 text-center mt-4 transition-colors">
+                            Import Sekarang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Print Section for Formal Excel-Style PDF Recap Reports -->
+    <div id="print-section" class="hidden"></div>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
