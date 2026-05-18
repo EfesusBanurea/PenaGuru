@@ -322,19 +322,24 @@
     animation: gradient-flow 22s ease infinite !important;
 }
 
-/* Golden Moonlight Glow for Navbar Logo & Text in Dark Mode */
+/* Base Navbar Logo & Text Glow Transitions (Animates BOTH ways: On & Off!) */
+.navbar-logo-glow {
+    filter: drop-shadow(0 0 0px rgba(250, 204, 21, 0)) !important;
+    transition: filter 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.navbar-logo-glow svg {
+    transition: color 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Golden Moonlight Glow in Dark Mode */
 .dark .navbar-logo-glow {
-    background: none !important;
-    -webkit-background-clip: unset !important;
-    background-clip: unset !important;
-    color: #fef08a !important; /* light yellow-200 */
-    filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.8)) drop-shadow(0 0 12px rgba(250, 204, 21, 0.4)) !important;
-    transition: filter 0.5s ease, color 0.5s ease;
+    filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.95)) drop-shadow(0 0 16px rgba(250, 204, 21, 0.5)) !important;
 }
 
 .dark .navbar-logo-glow svg {
-    color: #fef08a !important;
-    transition: color 0.5s ease;
+    color: #fef08a !important; /* Elegant golden book glow */
+    filter: drop-shadow(0 0 4px rgba(250, 204, 21, 0.75)) !important;
 }
 
 /* Sun/Moon Toggle Button Smooth 3D Transition & Rotate Animation */
