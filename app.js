@@ -878,6 +878,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     });
 
+    // Export Dropdown Toggle
+    const dropdownExportBtn = document.getElementById('dropdown-export-btn');
+    const dropdownExportMenu = document.getElementById('dropdown-export-menu');
+    const dropdownArrowIcon = document.getElementById('dropdown-arrow-icon');
+
+    if (dropdownExportBtn && dropdownExportMenu) {
+        dropdownExportBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isHidden = dropdownExportMenu.classList.contains('hidden');
+            if (isHidden) {
+                dropdownExportMenu.classList.remove('hidden');
+                if (dropdownArrowIcon) dropdownArrowIcon.classList.add('rotate-180');
+            } else {
+                dropdownExportMenu.classList.add('hidden');
+                if (dropdownArrowIcon) dropdownArrowIcon.classList.remove('rotate-180');
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdownExportBtn.contains(e.target) && !dropdownExportMenu.contains(e.target)) {
+                dropdownExportMenu.classList.add('hidden');
+                if (dropdownArrowIcon) dropdownArrowIcon.classList.remove('rotate-180');
+            }
+        });
+
+        // Close dropdown when an option is clicked
+        const dropdownOptions = dropdownExportMenu.querySelectorAll('button');
+        dropdownOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                dropdownExportMenu.classList.add('hidden');
+                if (dropdownArrowIcon) dropdownArrowIcon.classList.remove('rotate-180');
+            });
+        });
+    }
+
     // Save Dates from Headers
     tableHead.addEventListener('change', (e) => {
         if (e.target.classList.contains('header-date')) {
@@ -1006,7 +1042,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSubmitExport = document.getElementById('btn-submit-export');
 
     if (btnExportExcel && modalExport) {
-        btnExportExcel.addEventListener('click', () => {
+        btnExportExcel.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (dropdownExportMenu) dropdownExportMenu.classList.add('hidden');
+            if (dropdownArrowIcon) dropdownArrowIcon.classList.remove('rotate-180');
+
             if (db.classes.length === 0) {
                 alert('Belum ada kelas sama sekali!');
                 return;
@@ -1850,7 +1890,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- V2.0 Print PDF Listener ---
     // --- V2.0 Print PDF Listener ---
     if (btnPrintPdf) {
-        btnPrintPdf.addEventListener('click', () => {
+        btnPrintPdf.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (dropdownExportMenu) dropdownExportMenu.classList.add('hidden');
+            if (dropdownArrowIcon) dropdownArrowIcon.classList.remove('rotate-180');
+
             const currentClass = db.classes[currentClassIndex];
             if (!currentClass) return alert('Tidak ada kelas aktif yang dapat dicetak.');
             
