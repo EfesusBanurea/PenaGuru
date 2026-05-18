@@ -295,3 +295,76 @@
         text-decoration: underline !important;
     }
 }
+
+/* Animated Background Gradient Flow */
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animated-bg-gradient {
+    background: linear-gradient(-45deg, #f8fafc, #ffffff, #f1f5f9, #f8fafc, #e2e8f0, #ffffff) !important;
+    background-size: 400% 400% !important;
+    animation: gradient-flow 18s ease infinite !important;
+}
+
+/* Dark Mode Animated Background Gradient Flow */
+.dark .animated-bg-gradient {
+    background: linear-gradient(-45deg, #090d16, #0f172a, #1e1b4b, #030712, #0f172a, #0d1527) !important;
+    background-size: 400% 400% !important;
+    animation: gradient-flow 22s ease infinite !important;
+}
+
+/* Golden Moonlight Glow for Navbar Logo & Text in Dark Mode */
+.dark .navbar-logo-glow {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    color: #fef08a !important; /* light yellow-200 */
+    filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.8)) drop-shadow(0 0 12px rgba(250, 204, 21, 0.4)) !important;
+    transition: filter 0.5s ease, color 0.5s ease;
+}
+
+.dark .navbar-logo-glow svg {
+    color: #fef08a !important;
+    transition: color 0.5s ease;
+}
+
+/* Sun/Moon Toggle Button Smooth 3D Transition & Rotate Animation */
+#btn-theme-toggle svg {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, filter 0.4s ease !important;
+}
+
+#btn-theme-toggle svg.hidden {
+    display: block !important; /* Force render so browser can transition it */
+    opacity: 0 !important;
+    transform: translate(-50%, -50%) rotate(-90deg) !important; /* Spin and fade, centered perfectly! */
+    pointer-events: none !important;
+}
+
+#btn-theme-toggle svg:not(.hidden) {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) rotate(0deg) !important; /* Kept centered perfectly, no shift! */
+}
+
+/* Sun Icon Rays Glow with Gorgeous Halo */
+#theme-toggle-light-icon {
+    color: #eab308 !important; /* yellow-500 */
+    filter: drop-shadow(0 0 6px rgba(234, 179, 8, 0.95)) drop-shadow(0 0 14px rgba(234, 179, 8, 0.55)) !important;
+}
+
+/* Moon Icon Soft Lunar Glow */
+#theme-toggle-dark-icon {
+    color: #fef08a !important; /* yellow-200 */
+    filter: drop-shadow(0 0 5px rgba(254, 240, 138, 0.75)) !important;
+}
