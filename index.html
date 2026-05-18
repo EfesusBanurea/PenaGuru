@@ -264,7 +264,42 @@
                 </table>
                 </div>
                 <!-- Action Footer -->
-                <div class="p-4 border-t border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50 flex justify-end gap-3">
+                <div class="p-4 border-t border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700/50 flex justify-end items-center gap-3 relative">
+                    <!-- Unified Export Dropdown -->
+                    <div class="relative inline-block text-left">
+                        <button id="dropdown-export-btn" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-2 transition-all shadow-sm">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2M12 4v12m0-12-4 4m4-4 4 4"/>
+                            </svg>
+                            Ekspor Laporan
+                            <svg class="w-2.5 h-2.5 text-blue-100 transition-transform duration-200" id="dropdown-arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        
+                        <!-- Dropdown Menu (Pops Upwards) -->
+                        <div id="dropdown-export-menu" class="hidden absolute right-0 bottom-full mb-2 z-50 w-52 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden divide-y divide-gray-150 dark:divide-slate-700 transition-all">
+                            <div class="py-1">
+                                <!-- Print PDF Option -->
+                                <button id="btn-print-pdf" class="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 font-bold text-left transition-colors">
+                                    <svg class="w-5 h-5 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M16.444 18H19a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2.556M17 11V5a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v6h10ZM7 15h10v3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-3Z"/>
+                                    </svg>
+                                    Cetak Laporan (PDF)
+                                </button>
+                            </div>
+                            <div class="py-1">
+                                <!-- Export Excel Option -->
+                                <button id="btn-export-excel" class="w-full flex items-center gap-3 px-4 py-3 text-sm text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-950/20 font-bold text-left transition-colors">
+                                    <svg class="w-5 h-5 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM6.293 14.707a1 1 0 0 1 1.414 0L10 16.586l2.293-1.879a1 1 0 1 1 1.414 1.414L11.414 18l2.293 1.879a1 1 0 0 1-1.414 1.414L10 19.414l-2.293 1.879a1 1 0 1 1-1.414-1.414L8.586 18l-2.293-1.879a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Export ke Excel (.xlsx)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <button id="btn-save" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-bold rounded-lg text-sm px-6 py-2.5 text-center transition-all shadow-sm flex items-center gap-2">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 10V4a1 1 0 0 0-1-1H9.914a1 1 0 0 0-.707.293L5.293 7.207A1 1 0 0 0 5 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2M10 3v4a1 1 0 0 1-1 1H5m5 6h9m0 0-2-2m2 2-2 2"/>
@@ -292,13 +327,13 @@
     </main>
 
     <!-- Footer Watermark -->
-    <footer class="mt-auto pt-8 pb-36 text-center text-xs text-gray-400 dark:text-slate-500 font-medium">
+    <footer class="mt-auto py-8 text-center text-xs text-gray-400 dark:text-slate-500 font-medium">
         <div class="max-w-screen-xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-200/50 dark:border-slate-800/80 pt-6">
             <span class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1.5">
                 🎓 <strong>PenaGuru</strong> — Sistem Penilaian & Rekap Nilai Digital
             </span>
             <span class="flex items-center gap-1 text-[11px] bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1 rounded-full text-slate-600 dark:text-slate-400 font-bold shadow-sm">
-                ⚡ Made with ❤️ by <span class="text-blue-600 dark:text-blue-400 font-extrabold hover:underline cursor-pointer">Efesus Banurea</span>
+                ⚡ Made with ❤️ by <a href="https://instagram.com/ega_banurea" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 font-extrabold hover:underline inline-flex items-center gap-0.5">Efesus Banurea</a>
             </span>
         </div>
     </footer>
@@ -604,23 +639,7 @@
         </div>
     </div>
 
-    <!-- Floating Action Buttons (Bottom Right) -->
-    <div class="fixed bottom-8 right-8 flex flex-col gap-3 z-50">
-        <!-- Print PDF Button -->
-        <button id="btn-print-pdf" class="text-white bg-[#dc2626] hover:bg-[#b91c1c] focus:ring-4 focus:outline-none focus:ring-red-300 font-bold rounded-full text-base px-6 py-4 text-center transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
-            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M16.444 18H19a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2.556M17 11V5a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v6h10ZM7 15h10v3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-3Z"/>
-            </svg>
-            Cetak Laporan (PDF)
-        </button>
-        <!-- Export Excel Button -->
-        <button id="btn-export-excel" class="text-white bg-[#107c41] hover:bg-[#185c37] focus:ring-4 focus:outline-none focus:ring-green-300 font-bold rounded-full text-base px-6 py-4 text-center transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
-            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM6.293 14.707a1 1 0 0 1 1.414 0L10 16.586l2.293-1.879a1 1 0 1 1 1.414 1.414L11.414 18l2.293 1.879a1 1 0 0 1-1.414 1.414L10 19.414l-2.293 1.879a1 1 0 1 1-1.414-1.414L8.586 18l-2.293-1.879a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"/>
-            </svg>
-            Export ke Excel (.xlsx)
-        </button>
-    </div>
+    <!-- Floating Action Buttons Removed -->
 
     <!-- Modal Import Siswa -->
     <div id="modal-import" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
