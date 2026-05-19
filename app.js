@@ -999,13 +999,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Global mouse hover handler for seating popover
     let seatPopover = null;
+    let seatPopoverBackdrop = null;
 
     function createSeatPopover() {
         if (seatPopover) return seatPopover;
+        
+        // Create backdrop overlay
+        seatPopoverBackdrop = document.createElement('div');
+        seatPopoverBackdrop.id = 'seat-popover-backdrop';
+        seatPopoverBackdrop.className = 'fixed inset-0 z-40 bg-slate-900/60 backdrop-blur-sm transition-all duration-300 opacity-0 pointer-events-none';
+        document.body.appendChild(seatPopoverBackdrop);
+        
+        // Create popover modal
         seatPopover = document.createElement('div');
         seatPopover.id = 'seat-popover';
-        seatPopover.className = 'absolute z-50 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-xl p-4 rounded-xl transition-all duration-200 opacity-0 pointer-events-none w-72';
+        seatPopover.className = 'fixed z-50 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-2xl p-6 rounded-2xl transition-all duration-300 transform scale-95 opacity-0 pointer-events-none w-full max-w-sm left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2';
         document.body.appendChild(seatPopover);
+        
+        // Close on clicking backdrop
+        seatPopoverBackdrop.onclick = () => hideSeatPopover();
+        
         return seatPopover;
     }
 
@@ -1170,31 +1183,22 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
 
-        // Position Popover
-        const rect = element.getBoundingClientRect();
-        const popoverWidth = Math.max(288, maxC * 52);
-        popover.style.width = `${popoverWidth}px`;
-        
-        // Calculate horizontal position (center aligned to element if possible)
-        let left = rect.left + window.scrollX + (rect.width / 2) - (popoverWidth / 2);
-        // Avoid boundary overflow
-        if (left < 10) left = 10;
-        if (left + popoverWidth > window.innerWidth - 10) {
-            left = window.innerWidth - popoverWidth - 10;
+        // Position Popover as Centered Modal
+        const popoverWidth = Math.max(320, maxC * 58);
+        popover.style.maxWidth = `${popoverWidth}px`;
+        popover.style.width = '90%'; // responsive width boundary
+        popover.style.left = '';
+        popover.style.top = '';
+
+        // Show Backdrop Overlay
+        if (seatPopoverBackdrop) {
+            seatPopoverBackdrop.classList.remove('pointer-events-none', 'opacity-0');
+            seatPopoverBackdrop.classList.add('opacity-100');
         }
 
-        popover.style.left = `${left}px`;
-        popover.style.top = `0px`; // Temp
-        popover.classList.remove('pointer-events-none');
-        popover.classList.add('opacity-100');
-        
-        // Get actual height
-        const actualHeight = popover.offsetHeight;
-        let top = rect.top + window.scrollY - actualHeight - 10;
-        if (top < window.scrollY + 10) {
-            top = rect.bottom + window.scrollY + 10;
-        }
-        popover.style.top = `${top}px`;
+        // Show Modal
+        popover.classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+        popover.classList.add('opacity-100', 'scale-100');
     }
 
     // --- Interactive Seating Planner inside Class Edit Modal ---
@@ -1510,20 +1514,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function hideSeatPopover() {
         if (seatPopover) {
-            seatPopover.classList.add('pointer-events-none');
-            seatPopover.classList.remove('opacity-100');
+            seatPopover.classList.add('pointer-events-none', 'opacity-0', 'scale-95');
+            seatPopover.classList.remove('opacity-100', 'scale-100');
             delete seatPopover.dataset.activeStudentIdx;
         }
-    }
-
-    // Document listener for click-away to close seating popover
-    document.addEventListener('click', (e) => {
-        if (seatPopover && seatPopover.classList.contains('opacity-100')) {
-            if (!seatPopover.contains(e.target) && !e.target.closest('.cell-seat')) {
-                hideSeatPopover();
-            }
+        if (seatPopoverBackdrop) {
+            seatPopoverBackdrop.classList.add('pointer-events-none', 'opacity-0');
+            seatPopoverBackdrop.classList.remove('opacity-100');
         }
-    });
+    }
 
     btnOpenClassModal.onclick = () => openModal(modalClass);
     closeClassModal.onclick = () => closeModal(modalClass);
