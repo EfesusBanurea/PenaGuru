@@ -17,6 +17,21 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brown: {
+                            50: '#faf6f0',
+                            100: '#f4eae1',
+                            200: '#ead2c1',
+                            300: '#d6af92',
+                            400: '#bf8760',
+                            500: '#8a4f27',
+                            600: '#6c3b1b',
+                            700: '#4d260e',
+                            800: '#3c1d0a',
+                            900: '#2c1406',
+                            950: '#1a0a02',
+                        }
                     }
                 }
             }
@@ -44,11 +59,11 @@
                     <span class="hidden lg:inline">Buka Proyek</span>
                 </button>
                 <input type="file" id="input-open-project" accept=".json" class="hidden">
-                <button id="btn-save-project" class="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-bold rounded-lg text-sm p-2 lg:px-4 lg:py-2 shadow-md transition-all transform hover:scale-105" title="Backup Proyek (.json)">
+                <button id="btn-save-project" class="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-bold rounded-lg text-sm p-2 lg:px-4 lg:py-2 shadow-md transition-all transform hover:scale-105" title="Cadangkan Data (.json)">
                     <svg class="w-5 h-5 lg:w-4 lg:h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4-4-4"/>
                     </svg>
-                    <span class="hidden lg:inline">Backup</span>
+                    <span>Cadangkan Data</span>
                 </button>
                 <div class="h-6 border-l border-white/20 mx-2 hidden md:block"></div>
                 <!-- Theme Toggle Button -->
@@ -81,7 +96,7 @@
         <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div class="w-full md:w-auto flex justify-between items-start gap-4 flex-grow">
                 <div class="min-w-0 flex-grow">
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-indigo-800 dark:from-blue-400 dark:to-indigo-300 mb-2 tracking-tight">Kelola Nilai Murid</h1>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-brown-700 dark:from-blue-400 dark:to-brown-300 mb-2 tracking-tight">Kelola Nilai Murid</h1>
                     <p class="text-gray-600 dark:text-slate-350 text-sm sm:text-lg lg:text-xl font-bold leading-relaxed">Buku kerja digital yang aman, rapi, cepat, dan efisien.</p>
                 </div>
                 
@@ -134,6 +149,18 @@
                         Buat Kelas Baru
                     </button>
                 </div>
+                
+                <!-- Schedules Row: shows Hari/Jam Pelajaran 1 & 2 -->
+                <div id="class-schedule-info" class="flex justify-between items-center text-xs border-t border-gray-150 dark:border-slate-700 pt-3.5 mt-1 w-full hidden">
+                    <div class="flex flex-col items-start min-w-0 flex-1">
+                        <span class="text-[9px] uppercase tracking-wider text-gray-400 dark:text-slate-500 font-bold">Hari/Jam Pelajaran 1</span>
+                        <span id="info-sched1" class="font-bold text-blue-900 dark:text-blue-300 truncate max-w-full">-</span>
+                    </div>
+                    <div class="flex flex-col items-end min-w-0 flex-1 text-right pl-2">
+                        <span class="text-[9px] uppercase tracking-wider text-gray-400 dark:text-slate-500 font-bold">Hari/Jam Pelajaran 2</span>
+                        <span id="info-sched2" class="font-semibold text-gray-650 dark:text-slate-400 truncate max-w-full">-</span>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -149,7 +176,7 @@
             <!-- Mini Dashboard Statistik: side-by-side always -->
             <div id="class-stats-dashboard" class="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
                 <!-- Card 1: Rata-rata Kelas -->
-                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800/80 dark:to-blue-950/30 p-2.5 sm:p-5 rounded-xl sm:rounded-2xl border border-blue-100 dark:border-blue-500/20 shadow-sm flex items-center gap-2 sm:gap-4 transition-all hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+                <div class="bg-gradient-to-br from-brown-50/60 to-brown-100/40 dark:from-slate-800/80 dark:to-blue-950/30 p-2.5 sm:p-5 rounded-xl sm:rounded-2xl border border-blue-100 dark:border-blue-500/20 shadow-sm flex items-center gap-2 sm:gap-4 transition-all hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]">
                     <div class="w-8 h-8 sm:w-12 sm:h-12 bg-blue-500 rounded-lg sm:rounded-xl flex-shrink-0 flex items-center justify-center text-white shadow-lg shadow-blue-200 dark:shadow-none dark:bg-blue-600 dark:shadow-[0_0_15px_rgba(59,130,246,0.4)]">
                         <svg class="w-4.5 h-4.5 sm:w-6 sm:h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15v4m6-6v6m6-10v10m6-16v16"/></svg>
                     </div>
@@ -203,11 +230,11 @@
                     </svg>
                     Tambah Murid Baru
                 </button>
-                <button id="btn-open-import-modal" class="flex items-center gap-2 text-emerald-900 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 focus:outline-none hover:bg-emerald-100 dark:hover:bg-emerald-950/50 focus:ring-4 focus:ring-emerald-100 dark:focus:ring-emerald-950 font-medium rounded-lg text-sm px-5 py-2 shadow-sm transition-colors" title="Import Murid dari Excel/CSV">
+                <button id="btn-open-import-modal" class="flex items-center gap-2 text-emerald-900 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 focus:outline-none hover:bg-emerald-100 dark:hover:bg-emerald-950/50 focus:ring-4 focus:ring-emerald-100 dark:focus:ring-emerald-950 font-medium rounded-lg text-sm px-5 py-2 shadow-sm transition-colors" title="Import Kelas atau Murid dari Excel/CSV">
                     <svg class="w-4 h-4 text-emerald-700 dark:text-emerald-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v13m0 0-4-4m4 4 4-4m-9 4h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2Z"/>
                     </svg>
-                    Import Murid
+                    Import Kelas/Murid
                 </button>
                 <button id="btn-add-harian" class="flex items-center gap-2 text-blue-900 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 focus:outline-none hover:bg-blue-100 dark:hover:bg-blue-950/40 focus:ring-4 focus:ring-blue-100 font-semibold rounded-lg text-sm px-5 py-2 shadow-sm transition-colors">
                     <svg class="w-4 h-4 text-blue-900 dark:text-blue-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -381,6 +408,14 @@
                             </div>
                         </div>
                         <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Hari/Jam Pelajaran 1</label>
+                            <input type="text" id="input-class-sched1" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: Senin, 07.00-08.45">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Hari/Jam Pelajaran 2 (Opsional)</label>
+                            <input type="text" id="input-class-sched2" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: opsional atau Selasa, 09.00-10.45">
+                        </div>
+                        <div>
                             <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Jumlah Ulangan Harian Awal</label>
                             <input type="number" id="input-class-harian" value="2" min="1" max="10" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors" required>
                             <p class="mt-1.5 text-xs text-gray-500 dark:text-slate-400">Anda tetap bisa menambahkannya nanti lewat tabel.</p>
@@ -394,11 +429,11 @@
 
     <!-- Modal Edit Detail Kelas -->
     <div id="modal-edit-class" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-60 backdrop-blur-sm transition-opacity">
-        <div class="relative p-4 w-full max-w-md max-h-full m-auto mt-20">
+        <div class="relative p-4 w-full max-w-4xl max-h-full m-auto mt-10">
             <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
                 <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
                     <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
-                        Ubah Detail Kelas
+                        Ubah Pengaturan & Denah Kelas
                     </h3>
                     <button type="button" id="close-edit-class-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -408,30 +443,88 @@
                     </button>
                 </div>
                 <div class="p-6">
-                    <div class="space-y-5">
-                        <div class="flex gap-4">
-                            <div class="flex-1">
-                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Tingkat</label>
-                                <select id="input-edit-class-grade" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer">
-                                    <option value="VII">VII (Tujuh)</option>
-                                    <option value="VIII">VIII (Delapan)</option>
-                                    <option value="IX">IX (Sembilan)</option>
-                                </select>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <!-- Panel Kiri: Form Detail Kelas -->
+                        <div class="md:col-span-4 space-y-5 border-r border-gray-100 dark:border-slate-700 pr-6">
+                            <h4 class="text-xs font-extrabold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-2">Informasi Kelas</h4>
+                            <div class="flex gap-4">
+                                <div class="flex-1">
+                                    <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Tingkat</label>
+                                    <select id="input-edit-class-grade" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer">
+                                        <option value="VII">VII (Tujuh)</option>
+                                        <option value="VIII">VIII (Delapan)</option>
+                                        <option value="IX">IX (Sembilan)</option>
+                                    </select>
+                                </div>
+                                <div class="flex-1">
+                                    <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Rombel</label>
+                                    <input type="text" id="input-edit-class-group" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: A, B, 1" required>
+                                </div>
                             </div>
-                            <div class="flex-1">
-                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Rombel / Grup</label>
-                                <input type="text" id="input-edit-class-group" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: A, B, 1, 2, atau Unggulan" required>
+                            <div>
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Tahun Ajaran</label>
+                                <div class="flex items-center justify-between gap-2">
+                                    <input type="number" id="input-edit-class-year1" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" required>
+                                    <span class="font-extrabold text-gray-400 dark:text-slate-500">/</span>
+                                    <input type="number" id="input-edit-class-year2" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Hari/Jam Pelajaran 1</label>
+                                <input type="text" id="input-edit-class-sched1" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400">
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Hari/Jam Pelajaran 2</label>
+                                <input type="text" id="input-edit-class-sched2" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400">
+                            </div>
+                            <button id="btn-submit-edit-class" class="w-full text-white bg-blue-900 hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-3.5 text-center transition-colors shadow-md mt-4">Simpan Detail Kelas</button>
+                        </div>
+                        
+                        <!-- Panel Kanan: Atur Tempat Duduk (Seating Layout Planner) -->
+                        <div class="md:col-span-8 space-y-4">
+                            <h4 class="text-xs font-extrabold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-2">Denah Tempat Duduk Kelas (POV Guru)</h4>
+                            
+                            <!-- MS Word Seating Size Grid Selector & Type Toggle -->
+                            <div class="bg-gray-50 dark:bg-slate-750 p-4 rounded-xl border border-gray-150 dark:border-slate-700 flex flex-col md:flex-row items-center gap-6 justify-between shadow-inner">
+                                <div class="space-y-4 w-full md:w-auto">
+                                    <div>
+                                        <label class="block text-xs font-extrabold text-brown-700 dark:text-brown-400 uppercase tracking-wider mb-1">Pilih Ukuran Layout Kelas</label>
+                                        <div class="text-sm font-bold text-gray-800 dark:text-slate-100 mb-1" id="layout-grid-dimensions-label">6 Baris x 6 Kolom</div>
+                                        <p class="text-xs text-gray-400 dark:text-slate-500">Arahkan kursor & klik kotak untuk mengubah dimensi.</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-extrabold text-brown-700 dark:text-brown-400 uppercase tracking-wider mb-1.5">Tipe Susunan Meja</label>
+                                        <div class="inline-flex rounded-lg shadow-sm" role="group">
+                                            <button type="button" id="btn-seat-type-single" class="px-3.5 py-2 text-xs font-bold rounded-s-lg border border-gray-250 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors focus:z-10">
+                                                1 Meja 1 Orang
+                                            </button>
+                                            <button type="button" id="btn-seat-type-double" class="px-3.5 py-2 text-xs font-bold rounded-e-lg border-t border-b border-r border-gray-250 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors focus:z-10">
+                                                1 Meja 2 Orang
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 8x8 Grid Selector wrapper -->
+                                <div class="flex flex-col items-center">
+                                    <div class="grid grid-cols-8 gap-1 p-2 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-sm" id="layout-grid-selector">
+                                        <!-- Will be generated by JS dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Seating Layout Canvas -->
+                            <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-xl flex flex-col items-center gap-4 relative min-h-[300px]">
+                                <!-- Main interactive grid container -->
+                                <div id="interactive-layout-grid-wrapper" class="w-full flex justify-center">
+                                    <!-- Interactive grid will be generated dynamically by JS -->
+                                </div>
+                                
+                                <!-- Teacher desk area at the bottom -->
+                                <div class="w-2/3 bg-gray-100 dark:bg-slate-750 text-center py-2 text-xs font-bold text-gray-500 dark:text-slate-400 rounded-lg border border-gray-200 dark:border-slate-650 uppercase tracking-widest mt-2 shadow-sm">
+                                    Papan Tulis / Meja Guru (Depan)
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Tahun Ajaran</label>
-                            <div class="flex items-center justify-between gap-3">
-                                <input type="number" id="input-edit-class-year1" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: 2024" required>
-                                <span class="font-extrabold text-gray-400 dark:text-slate-500 text-xl">/</span>
-                                <input type="number" id="input-edit-class-year2" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Contoh: 2025" required>
-                            </div>
-                        </div>
-                        <button id="btn-submit-edit-class" class="w-full text-white bg-blue-900 hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-3.5 text-center transition-colors shadow-md mt-4">Simpan Perubahan Kelas</button>
                     </div>
                 </div>
             </div>
@@ -471,6 +564,36 @@
                         <div>
                             <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Nama Lengkap Murid</label>
                             <input type="text" id="input-student-name" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Ketik nama lengkap..." required>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Baris Tempat Duduk</label>
+                                <select id="input-student-seat-row" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer">
+                                    <option value="">-- Tanpa Kursi --</option>
+                                    <option value="1">Baris 1</option>
+                                    <option value="2">Baris 2</option>
+                                    <option value="3">Baris 3</option>
+                                    <option value="4">Baris 4</option>
+                                    <option value="5">Baris 5</option>
+                                    <option value="6">Baris 6</option>
+                                    <option value="7">Baris 7</option>
+                                    <option value="8">Baris 8</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Kolom Tempat Duduk</label>
+                                <select id="input-student-seat-col" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer">
+                                    <option value="">-- Tanpa Kursi --</option>
+                                    <option value="1">Kolom 1</option>
+                                    <option value="2">Kolom 2</option>
+                                    <option value="3">Kolom 3</option>
+                                    <option value="4">Kolom 4</option>
+                                    <option value="5">Kolom 5</option>
+                                    <option value="6">Kolom 6</option>
+                                    <option value="7">Kolom 7</option>
+                                    <option value="8">Kolom 8</option>
+                                </select>
+                            </div>
                         </div>
                         <button id="btn-submit-student" class="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-bold rounded-lg text-base px-5 py-3.5 text-center transition-colors shadow-md mt-4 flex items-center justify-center gap-2">
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -518,6 +641,36 @@
                         <div>
                             <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Nama Lengkap Murid</label>
                             <input type="text" id="input-edit-student-name" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm transition-colors dark:placeholder-slate-400" placeholder="Ketik nama lengkap..." required>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Baris Tempat Duduk</label>
+                                <select id="input-edit-student-seat-row" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer">
+                                    <option value="">-- Tanpa Kursi --</option>
+                                    <option value="1">Baris 1</option>
+                                    <option value="2">Baris 2</option>
+                                    <option value="3">Baris 3</option>
+                                    <option value="4">Baris 4</option>
+                                    <option value="5">Baris 5</option>
+                                    <option value="6">Baris 6</option>
+                                    <option value="7">Baris 7</option>
+                                    <option value="8">Baris 8</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-slate-100">Kolom Tempat Duduk</label>
+                                <select id="input-edit-student-seat-col" class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 text-base rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-3 shadow-sm cursor-pointer">
+                                    <option value="">-- Tanpa Kursi --</option>
+                                    <option value="1">Kolom 1</option>
+                                    <option value="2">Kolom 2</option>
+                                    <option value="3">Kolom 3</option>
+                                    <option value="4">Kolom 4</option>
+                                    <option value="5">Kolom 5</option>
+                                    <option value="6">Kolom 6</option>
+                                    <option value="7">Kolom 7</option>
+                                    <option value="8">Kolom 8</option>
+                                </select>
+                            </div>
                         </div>
                         <button id="btn-submit-edit-student" class="w-full text-white bg-blue-900 hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-3.5 text-center transition-colors shadow-md mt-4 flex items-center justify-center gap-2">
                             <svg class="w-5 h-5 pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -649,7 +802,7 @@
             <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all dark:bg-slate-800 dark:border-slate-700">
                 <div class="flex items-center justify-between p-5 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
                     <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100">
-                        Import Siswa dari Excel/CSV
+                        Import Kelas / Murid dari Excel
                     </h3>
                     <button type="button" id="close-import-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-700 dark:hover:text-slate-100 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -660,12 +813,14 @@
                 </div>
                 <div class="p-6">
                     <div class="space-y-4">
-                        <p class="text-sm text-gray-500 dark:text-slate-400">
-                            Pilih file Excel (.xlsx, .xls) atau CSV yang berisi daftar siswa.
+                        <p class="text-sm text-gray-500 dark:text-slate-400 leading-relaxed">
+                            Mendukung dua metode impor:
+                            <br>• <strong>Import Rekap Kelas (Multi-Sheet)</strong>: Mengunggah file Excel hasil ekspor rekap PenaGuru untuk menyinkronkan seluruh kelas (termasuk membuat kelas baru, memperbarui nilai, menambahkan kolom ulangan, atau menghapus murid).
+                            <br>• <strong>Import Roster Murid (Tabel Biasa)</strong>: Mengunggah daftar murid baru ke kelas aktif saat ini.
                         </p>
                         
                         <div class="bg-blue-50 dark:bg-slate-900 border border-blue-200 dark:border-slate-700 p-4 rounded-xl text-xs text-blue-900 dark:text-blue-300">
-                            <strong class="block mb-1 text-sm font-bold">⚠️ Ketentuan Format Kolom:</strong>
+                            <strong class="block mb-1 text-sm font-bold">⚠️ Format Kolom Roster Murid:</strong>
                             <ul class="list-decimal list-inside space-y-1 mt-1">
                                 <li>Kolom A: <strong>NIS</strong> (Nomor Induk Siswa)</li>
                                 <li>Kolom B: <strong>Nama Lengkap Murid</strong></li>

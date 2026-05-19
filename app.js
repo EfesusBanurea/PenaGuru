@@ -10,27 +10,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // OVERRIDE & RESET DATA FOR FRESH START (Sesuai Permintaan User)
-    const DB_VERSION_FLAG = 'grading_db_v7_10_students';
+    const DB_VERSION_FLAG = 'grading_db_v10_seat_type';
     if (!localStorage.getItem(DB_VERSION_FLAG)) {
         db = {
             classes: [
                 {
-                    id: "class_2024_7a", name: "Kelas VII-A", tahunAjaran: "2024/2025", harianCount: 3, harianDates: [], utsDate: "", uasDate: "", ketuaId: "s14",
+                    id: "class_2024_7a", name: "Kelas VII-A", tahunAjaran: "2024/2025", harianCount: 3, harianDates: [], utsDate: "", uasDate: "", ketuaId: "s14", seatRows: 6, seatCols: 6, seatType: "single",
                     students: [
-                        { id: "s1", nis: "24001", nama: "Ahmad Budi Santoso", jk: "L", harian: [85, 90, 88], uts: 85, uas: 90, catatan: "Sangat aktif di kelas." },
-                        { id: "s2", nis: "24002", nama: "Citra Kirana", jk: "P", harian: [92, 95, 90], uts: 88, uas: 92, catatan: "Pertahankan!" },
-                        { id: "s3", nis: "24003", nama: "Dion Wiyoko", jk: "L", harian: [78, 80, 82], uts: 75, uas: 80, catatan: "Perbanyak latihan soal." },
-                        { id: "s4", nis: "24004", nama: "Eka Putri", jk: "P", harian: [88, 85, 90], uts: 89, uas: 90, catatan: "" },
-                        { id: "s13", nis: "24005", nama: "Farhan Maulana", jk: "L", harian: [75, 78, 80], uts: 76, uas: 82, catatan: "" },
-                        { id: "s14", nis: "24006", nama: "Gita Savitri", jk: "P", harian: [95, 98, 96], uts: 95, uas: 97, catatan: "Teladan kelas." },
-                        { id: "s15", nis: "24007", nama: "Hendra Wijaya", jk: "L", harian: [80, 82, 85], uts: 80, uas: 84, catatan: "" },
-                        { id: "s16", nis: "24008", nama: "Indah Permatasari", jk: "P", harian: [88, 90, 92], uts: 89, uas: 91, catatan: "Aktif bertanya." },
-                        { id: "s30", nis: "24009", nama: "Bagas Satrio", jk: "L", harian: [82, 80, 85], uts: 82, uas: 85, catatan: "" },
-                        { id: "s31", nis: "24010", nama: "Alya Nabila", jk: "P", harian: [90, 95, 88], uts: 92, uas: 90, catatan: "" }
+                        { id: "s1", nis: "24001", nama: "Ahmad Budi Santoso", jk: "L", harian: [85, 90, 88], uts: 85, uas: 90, catatan: "Sangat aktif di kelas.", seatRow: 1, seatCol: 1 },
+                        { id: "s2", nis: "24002", nama: "Citra Kirana", jk: "P", harian: [92, 95, 90], uts: 88, uas: 92, catatan: "Pertahankan!", seatRow: 1, seatCol: 2 },
+                        { id: "s3", nis: "24003", nama: "Dion Wiyoko", jk: "L", harian: [78, 80, 82], uts: 75, uas: 80, catatan: "Perbanyak latihan soal.", seatRow: 2, seatCol: 1 },
+                        { id: "s4", nis: "24004", nama: "Eka Putri", jk: "P", harian: [88, 85, 90], uts: 89, uas: 90, catatan: "", seatRow: 2, seatCol: 2 },
+                        { id: "s13", nis: "24005", nama: "Farhan Maulana", jk: "L", harian: [75, 78, 80], uts: 76, uas: 82, catatan: "", seatRow: 3, seatCol: 1 },
+                        { id: "s14", nis: "24006", nama: "Gita Savitri", jk: "P", harian: [95, 98, 96], uts: 95, uas: 97, catatan: "Teladan kelas.", seatRow: 3, seatCol: 2 },
+                        { id: "s15", nis: "24007", nama: "Hendra Wijaya", jk: "L", harian: [80, 82, 85], uts: 80, uas: 84, catatan: "", seatRow: 4, seatCol: 1 },
+                        { id: "s16", nis: "24008", nama: "Indah Permatasari", jk: "P", harian: [88, 90, 92], uts: 89, uas: 91, catatan: "Aktif bertanya.", seatRow: 4, seatCol: 2 },
+                        { id: "s30", nis: "24009", nama: "Bagas Satrio", jk: "L", harian: [82, 80, 85], uts: 82, uas: 85, catatan: "", seatRow: 5, seatCol: 1 },
+                        { id: "s31", nis: "24010", nama: "Alya Nabila", jk: "P", harian: [90, 95, 88], uts: 92, uas: 90, catatan: "", seatRow: 5, seatCol: 2 }
                     ]
                 },
                 {
-                    id: "class_2024_7b", name: "Kelas VII-B", tahunAjaran: "2024/2025", harianCount: 2, harianDates: [], utsDate: "", uasDate: "", ketuaId: "s18",
+                    id: "class_2024_7b", name: "Kelas VII-B", tahunAjaran: "2024/2025", harianCount: 2, harianDates: [], utsDate: "", uasDate: "", ketuaId: "s18", seatRows: 6, seatCols: 6, seatType: "single",
                     students: [
                         { id: "s5", nis: "24011", nama: "Fajar Siddiq", jk: "L", harian: [60, 65], uts: 70, uas: 75, catatan: "Butuh remedial secepatnya." },
                         { id: "s6", nis: "24012", nama: "Gita Gutawa", jk: "P", harian: [92, 95], uts: 94, uas: 96, catatan: "Sangat rajin mengerjakan PR." },
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ]
                 },
                 {
-                    id: "class_2023_8a", name: "Kelas VIII-A", tahunAjaran: "2023/2024", harianCount: 2, harianDates: [], utsDate: "", uasDate: "", ketuaId: "s9",
+                    id: "class_2023_8a", name: "Kelas VIII-A", tahunAjaran: "2023/2024", harianCount: 2, harianDates: [], utsDate: "", uasDate: "", ketuaId: "s9", seatRows: 6, seatCols: 6, seatType: "single",
                     students: [
                         { id: "s7", nis: "23001", nama: "Iqbal Ramadhan", jk: "L", harian: [88, 90], uts: 85, uas: 90, catatan: "Memiliki minat baca yang tinggi." },
                         { id: "s8", nis: "23002", nama: "Jihan Audy", jk: "P", harian: [70, 75], uts: 78, uas: 82, catatan: "Sering mengantuk." },
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ]
                 },
                 {
-                    id: "class_2022_9a", name: "Kelas IX-A", tahunAjaran: "2022/2023", harianCount: 2, harianDates: [], utsDate: "", uasDate: "", ketuaId: "s26",
+                    id: "class_2022_9a", name: "Kelas IX-A", tahunAjaran: "2022/2023", harianCount: 2, harianDates: [], utsDate: "", uasDate: "", ketuaId: "s26", seatRows: 6, seatCols: 6, seatType: "single",
                     students: [
                         { id: "s10", nis: "22001", nama: "Lesti Kejora", jk: "P", harian: [80, 85], uts: 82, uas: 88, catatan: "" },
                         { id: "s11", nis: "22002", nama: "Maudy Ayunda", jk: "P", harian: [95, 96], uts: 94, uas: 98, catatan: "Sangat berprestasi." },
@@ -504,12 +504,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 ketuaDropdown.disabled = true;
             }
             updateStatsDashboard();
+            const classScheduleInfo = document.getElementById('class-schedule-info');
+            if (classScheduleInfo) {
+                classScheduleInfo.classList.add('hidden');
+            }
             return;
         }
         
         const currentClass = db.classes[currentClassIndex];
         const harianCount = currentClass.harianCount;
         const isLocked = !!currentClass.isLocked;
+
+        // Update active class schedule display
+        const infoSched1 = document.getElementById('info-sched1');
+        const infoSched2 = document.getElementById('info-sched2');
+        const classScheduleInfo = document.getElementById('class-schedule-info');
+        if (classScheduleInfo) {
+            classScheduleInfo.classList.remove('hidden');
+            if (infoSched1) infoSched1.textContent = currentClass.sched1 || '-';
+            if (infoSched2) {
+                const s2 = (currentClass.sched2 || '').trim();
+                infoSched2.textContent = (!s2 || s2.toLowerCase() === 'opsional') ? '-' : s2;
+            }
+        }
 
         // Update Lock Class UI Button & Banner
         if (btnLockClass) {
@@ -555,7 +572,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <th scope="col" class="px-2 py-4 border-x border-blue-800 w-10 text-center align-top">No</th>
             <th scope="col" class="px-4 py-4 border-x border-blue-800 w-24 text-center align-top">NIS</th>
             <th scope="col" class="px-4 py-4 border-x border-blue-800 text-center align-top">NAMA LENGKAP</th>
-            <th scope="col" class="px-2 py-4 border-x border-blue-800 w-16 text-center align-top">L/P</th>`;
+            <th scope="col" class="px-2 py-4 border-x border-blue-800 w-16 text-center align-top">L/P</th>
+            <th scope="col" class="px-2 py-4 border-x border-blue-800 w-24 text-center align-top">TEMPAT DUDUK</th>`;
             
         for (let i = 0; i < harianCount; i++) {
             const dVal = currentClass.harianDates && currentClass.harianDates[i] ? currentClass.harianDates[i] : '';
@@ -650,6 +668,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </td>
                 <td class="px-2 border-x border-gray-200 dark:border-slate-700 text-center font-bold text-gray-700 dark:text-slate-300 w-16">${student.jk || '-'}</td>
+                <td class="px-2 border-x border-gray-200 dark:border-slate-700 text-center w-24 relative cell-seat cursor-pointer select-none" data-student-idx="${studentIndex}">
+                    <span class="seat-badge px-2 py-0.5 rounded-full text-xs font-semibold transition-all duration-150 ${student.seatRow && student.seatCol ? 'bg-brown-50 hover:bg-brown-100 dark:bg-slate-700 dark:hover:bg-slate-600 text-brown-600 dark:text-brown-300 border border-brown-200 dark:border-slate-600 shadow-sm' : 'bg-gray-100 hover:bg-gray-200 text-gray-500 dark:bg-slate-700 dark:hover:bg-slate-650 dark:text-slate-400'}">
+                        ${student.seatRow && student.seatCol ? `B${student.seatRow}-K${student.seatCol}` : '-'}
+                    </span>
+                </td>
             `;
  
             // Dynamic Harian Columns
@@ -714,6 +737,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (inputEditStudentNis) inputEditStudentNis.value = student.nis || '';
                         if (inputEditStudentJk) inputEditStudentJk.value = student.jk || 'L';
                         if (inputEditStudentName) inputEditStudentName.value = student.nama || '';
+                        if (document.getElementById('input-edit-student-seat-row')) {
+                            document.getElementById('input-edit-student-seat-row').value = student.seatRow !== undefined && student.seatRow !== null ? String(student.seatRow) : '';
+                        }
+                        if (document.getElementById('input-edit-student-seat-col')) {
+                            document.getElementById('input-edit-student-seat-col').value = student.seatCol !== undefined && student.seatCol !== null ? String(student.seatCol) : '';
+                        }
                         
                         openModal(modalEditStudent);
                     }
@@ -753,6 +782,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // Attach seat popover listeners
+        document.querySelectorAll('.cell-seat').forEach(cell => {
+            const idx = parseInt(cell.getAttribute('data-student-idx'));
+            cell.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (seatPopover && seatPopover.classList.contains('opacity-100') && seatPopover.dataset.activeStudentIdx === String(idx)) {
+                    hideSeatPopover();
+                } else {
+                    showSeatPopover(cell, idx);
+                }
+            });
+        });
+        
         updateStatsDashboard();
         updateUndoRedoButtons();
     }
@@ -955,6 +997,534 @@ document.addEventListener('DOMContentLoaded', () => {
         modalEl.classList.remove('flex');
     }
 
+    // Global mouse hover handler for seating popover
+    let seatPopover = null;
+
+    function createSeatPopover() {
+        if (seatPopover) return seatPopover;
+        seatPopover = document.createElement('div');
+        seatPopover.id = 'seat-popover';
+        seatPopover.className = 'absolute z-50 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-xl p-4 rounded-xl transition-all duration-200 opacity-0 pointer-events-none w-72';
+        document.body.appendChild(seatPopover);
+        return seatPopover;
+    }
+
+    function showSeatPopover(element, studentIdx) {
+        const popover = createSeatPopover();
+        const student = db.classes[currentClassIndex].students[studentIdx];
+        if (!student) return;
+        
+        popover.dataset.activeStudentIdx = String(studentIdx);
+
+        // Build seat map
+        const seatMap = {};
+        const activeClass = db.classes[currentClassIndex];
+        const maxR = activeClass.seatRows || 6;
+        const maxC = activeClass.seatCols || 6;
+        
+        activeClass.students.forEach(s => {
+            if (s.seatRow && s.seatCol) {
+                const r = parseInt(s.seatRow);
+                const c = parseInt(s.seatCol);
+                const initials = s.nama.split(' ').filter(Boolean).map(p => p[0]).join('').substring(0, 3).toUpperCase();
+                seatMap[`${r},${c}`] = {
+                    id: s.id,
+                    initials: initials,
+                    nama: s.nama
+                };
+            }
+        });
+
+        const renderChairHTML = (row, col, occ, isCur) => {
+            if (isCur) {
+                return `
+                    <div class="flex flex-col items-center justify-center p-2 bg-red-600 dark:bg-red-500 text-white border border-red-750 dark:border-red-400 rounded-xl select-none transition-all duration-150 shadow-md w-full aspect-square" title="${student.nama} (Baris ${row}, Kolom ${col})">
+                        <span class="text-[9px] font-black leading-tight text-center break-words line-clamp-2 w-full px-1 uppercase tracking-wide">
+                            ${student.nama}
+                        </span>
+                    </div>
+                `;
+            } else if (occ) {
+                return `
+                    <div class="flex flex-col items-center justify-center p-2 bg-brown-600 dark:bg-brown-500 text-white border border-brown-700 dark:border-brown-400 rounded-xl select-none transition-all duration-150 shadow-md w-full aspect-square" title="${occ.nama} (Baris ${row}, Kolom ${col})">
+                        <span class="text-[9px] font-black leading-tight text-center break-words line-clamp-2 w-full px-1 uppercase tracking-wide">
+                            ${occ.nama}
+                        </span>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="flex flex-col items-center justify-center p-2 bg-gray-50/30 dark:bg-slate-800/20 border border-dashed border-gray-300 dark:border-slate-650 rounded-xl select-none transition-all duration-150 w-full aspect-square" title="Kosong (Baris ${row}, Kolom ${col})">
+                        <span class="text-[9px] text-gray-400 dark:text-slate-500 font-extrabold uppercase mb-1">Kosong</span>
+                        <div class="text-[11px] text-gray-350 dark:text-slate-550 font-black">
+                            +
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        // Generate Grid HTML (POV Guru: whiteboard/teacher desk at the bottom, row 1 at the bottom, col 1 on the right)
+        let gridHTML = `
+            <div class="flex flex-col items-center gap-3">
+                <div class="flex items-center justify-between w-full border-b border-gray-100 dark:border-slate-700 pb-2 mb-1">
+                    <span class="text-[11px] uppercase tracking-wider font-extrabold text-brown-600 dark:text-brown-400">Denah POV Guru</span>
+                    <button type="button" id="btn-close-seat-popover" class="text-gray-400 hover:text-gray-650 dark:hover:text-slate-350 transition-colors p-1">
+                        <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Seat Grid -->
+                <div class="grid gap-1.5 w-full" style="grid-template-columns: repeat(${maxC}, minmax(0, 1fr));">
+        `;
+
+        const isDoubleDesk = (activeClass.seatType === 'double');
+
+        // Loop rows in reverse order (maxR down to 1) so row 1 (front) is at the bottom
+        for (let r = maxR; r >= 1; r--) {
+            if (isDoubleDesk) {
+                // In double desk mode, columns are grouped into pairs (left-right desks)
+                const numPairs = Math.ceil(maxC / 2);
+                for (let k = 0; k < numPairs; k++) {
+                    const c_left = maxC - 2 * k;
+                    const c_right = maxC - (2 * k + 1);
+
+                    const keyLeft = `${r},${c_left}`;
+                    const occupiedLeft = seatMap[keyLeft];
+                    const isCurrentLeft = (occupiedLeft && occupiedLeft.id === student.id) || (student.seatRow === r && student.seatCol === c_left);
+
+                    if (c_right >= 1) {
+                        const keyRight = `${r},${c_right}`;
+                        const occupiedRight = seatMap[keyRight];
+                        const isCurrentRight = (occupiedRight && occupiedRight.id === student.id) || (student.seatRow === r && student.seatCol === c_right);
+
+                        gridHTML += `
+                            <div class="col-span-2 flex flex-col justify-between p-1.5 border border-brown-200 dark:border-slate-700 bg-brown-100/40 dark:bg-slate-800/30 rounded-xl shadow-sm gap-1">
+                                <!-- Chairs Row -->
+                                <div class="grid grid-cols-2 gap-1">
+                                    ${renderChairHTML(r, c_left, occupiedLeft, isCurrentLeft)}
+                                    ${renderChairHTML(r, c_right, occupiedRight, isCurrentRight)}
+                                </div>
+                                <!-- Desk -->
+                                <div class="py-0.5 bg-gray-200 dark:bg-slate-750 rounded text-center text-[7px] font-extrabold text-gray-500 dark:text-slate-400 uppercase tracking-widest border border-gray-300 dark:border-slate-650">
+                                    Meja
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        // Odd column fallback
+                        gridHTML += `
+                            <div class="col-span-1 flex flex-col justify-between p-1.5 border border-brown-200 dark:border-slate-700 bg-brown-100/40 dark:bg-slate-800/30 rounded-xl shadow-sm gap-1">
+                                ${renderChairHTML(r, c_left, occupiedLeft, isCurrentLeft)}
+                                <!-- Desk -->
+                                <div class="py-0.5 bg-gray-200 dark:bg-slate-750 rounded text-center text-[7px] font-extrabold text-gray-500 dark:text-slate-400 uppercase tracking-widest border border-gray-300 dark:border-slate-650">
+                                    Meja
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+            } else {
+                for (let c = maxC; c >= 1; c--) {
+                    const key = `${r},${c}`;
+                    const occupied = seatMap[key];
+                    const isCurrent = (occupied && occupied.id === student.id) || (student.seatRow === r && student.seatCol === c);
+
+                    gridHTML += `
+                        <div class="col-span-1 flex flex-col justify-between p-1.5 border border-brown-200 dark:border-slate-700 bg-brown-100/40 dark:bg-slate-800/30 rounded-xl shadow-sm gap-1">
+                            ${renderChairHTML(r, c, occupied, isCurrent)}
+                            <!-- Desk -->
+                            <div class="py-0.5 bg-gray-200 dark:bg-slate-750 rounded text-center text-[7px] font-extrabold text-gray-500 dark:text-slate-400 uppercase tracking-widest border border-gray-300 dark:border-slate-650">
+                                Meja
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        gridHTML += `
+                </div>
+                
+                <!-- Front/Teacher Area at the bottom -->
+                <div class="w-full bg-gray-100 dark:bg-slate-750 text-center py-1.5 text-[10px] font-bold text-gray-500 dark:text-slate-400 rounded-lg border border-gray-200 dark:border-slate-650 uppercase tracking-widest mt-1">
+                    Papan Tulis / Meja Guru
+                </div>
+                
+                <div class="text-[9px] text-gray-400 dark:text-slate-500 mt-0.5 italic w-full text-center">
+                    Merah: Kursi milik ${student.nama.split(' ')[0]}
+                </div>
+            </div>
+        `;
+
+        popover.innerHTML = gridHTML;
+
+        // Register close button
+        const closeBtn = popover.querySelector('#btn-close-seat-popover');
+        if (closeBtn) {
+            closeBtn.onclick = (e) => {
+                e.stopPropagation();
+                hideSeatPopover();
+            };
+        }
+
+        // Position Popover
+        const rect = element.getBoundingClientRect();
+        const popoverWidth = Math.max(288, maxC * 52);
+        popover.style.width = `${popoverWidth}px`;
+        
+        // Calculate horizontal position (center aligned to element if possible)
+        let left = rect.left + window.scrollX + (rect.width / 2) - (popoverWidth / 2);
+        // Avoid boundary overflow
+        if (left < 10) left = 10;
+        if (left + popoverWidth > window.innerWidth - 10) {
+            left = window.innerWidth - popoverWidth - 10;
+        }
+
+        popover.style.left = `${left}px`;
+        popover.style.top = `0px`; // Temp
+        popover.classList.remove('pointer-events-none');
+        popover.classList.add('opacity-100');
+        
+        // Get actual height
+        const actualHeight = popover.offsetHeight;
+        let top = rect.top + window.scrollY - actualHeight - 10;
+        if (top < window.scrollY + 10) {
+            top = rect.bottom + window.scrollY + 10;
+        }
+        popover.style.top = `${top}px`;
+    }
+
+    // --- Interactive Seating Planner inside Class Edit Modal ---
+    let seatPickerMenu = null;
+
+    function renderLayoutGridSelector(currentRows, currentCols) {
+        const container = document.getElementById('layout-grid-selector');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        for (let y = 0; y < 8; y++) {
+            const r = 8 - y;
+            for (let x = 0; x < 8; x++) {
+                const c = 8 - x;
+                const box = document.createElement('div');
+                box.className = 'w-4 h-4 border border-gray-200 dark:border-slate-700 rounded-sm cursor-pointer transition-colors duration-100 bg-gray-50 dark:bg-slate-750';
+                box.dataset.row = r;
+                box.dataset.col = c;
+                
+                // Highlight if inside selected layout bounds
+                if (r <= currentRows && c <= currentCols) {
+                    box.classList.remove('bg-gray-50', 'dark:bg-slate-750');
+                    box.classList.add('bg-brown-600', 'dark:bg-brown-500');
+                }
+                
+                box.onmouseenter = () => highlightSelector(r, c);
+                box.onclick = () => selectSelectorDimensions(r, c);
+                container.appendChild(box);
+            }
+        }
+        
+        container.onmouseleave = () => {
+            const cls = db.classes[currentClassIndex];
+            const activeR = cls.seatRows || 6;
+            const activeC = cls.seatCols || 6;
+            highlightSelector(activeR, activeC);
+        };
+    }
+    
+    function highlightSelector(targetR, targetC) {
+        const label = document.getElementById('layout-grid-dimensions-label');
+        if (label) {
+            label.textContent = `${targetR} Baris x ${targetC} Kolom`;
+        }
+        
+        const boxes = document.querySelectorAll('#layout-grid-selector div');
+        boxes.forEach(box => {
+            const r = parseInt(box.dataset.row);
+            const c = parseInt(box.dataset.col);
+            if (r <= targetR && c <= targetC) {
+                box.classList.remove('bg-gray-50', 'dark:bg-slate-750');
+                box.classList.add('bg-brown-600', 'dark:bg-brown-500');
+            } else {
+                box.classList.remove('bg-brown-600', 'dark:bg-brown-500');
+                box.classList.add('bg-gray-50', 'dark:bg-slate-750');
+            }
+        });
+    }
+    
+    function selectSelectorDimensions(targetR, targetC) {
+        const cls = db.classes[currentClassIndex];
+        recordState();
+        cls.seatRows = targetR;
+        cls.seatCols = targetC;
+        saveDB();
+        renderLayoutGridSelector(targetR, targetC);
+        renderSeatingGrid(cls);
+        renderTable();
+    }
+
+    function renderSeatingGrid(cls) {
+        const wrapper = document.getElementById('interactive-layout-grid-wrapper');
+        if (!wrapper) return;
+        
+        if (seatPickerMenu) {
+            seatPickerMenu.remove();
+            seatPickerMenu = null;
+        }
+
+        const maxR = cls.seatRows || 6;
+        const maxC = cls.seatCols || 6;
+        
+        // Build seat map
+        const seatMap = {};
+        cls.students.forEach(s => {
+            if (s.seatRow && s.seatCol) {
+                const r = parseInt(s.seatRow);
+                const c = parseInt(s.seatCol);
+                const initials = s.nama.split(' ').filter(Boolean).map(p => p[0]).join('').substring(0, 3).toUpperCase();
+                seatMap[`${r},${c}`] = {
+                    id: s.id,
+                    initials: initials,
+                    nama: s.nama
+                };
+            }
+        });
+
+        const renderClassEditorChairHTML = (row, col, occ) => {
+            if (occ) {
+                return `
+                    <div class="flex flex-col items-center justify-center p-2 bg-brown-600 dark:bg-brown-500 text-white border border-brown-700 dark:border-brown-400 rounded-xl select-none transition-all duration-150 cursor-pointer hover:scale-[1.04] shadow-md w-full aspect-square" data-row="${row}" data-col="${col}" title="${occ.nama}">
+                        <span class="text-[9px] font-black leading-tight text-center break-words line-clamp-2 w-full px-1 uppercase tracking-wide">
+                            ${occ.nama}
+                        </span>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="flex flex-col items-center justify-center p-2 bg-gray-50/30 dark:bg-slate-800/20 border border-dashed border-gray-300 dark:border-slate-650 rounded-xl select-none transition-all duration-150 cursor-pointer hover:border-brown-500 dark:hover:border-slate-500 hover:scale-[1.04] w-full aspect-square" data-row="${row}" data-col="${col}">
+                        <span class="text-[9px] text-gray-400 dark:text-slate-500 font-extrabold uppercase mb-1">Kosong</span>
+                        <div class="text-[11px] text-gray-350 dark:text-slate-550 font-black">
+                            +
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        // Grid HTML
+        let gridHTML = `<div class="grid gap-2.5 w-full max-w-xl" style="grid-template-columns: repeat(${maxC}, minmax(0, 1fr));">`;
+        
+        const isDoubleDesk = (cls.seatType === 'double');
+
+        // POV Guru: Row maxR down to 1, Column maxC down to 1
+        for (let r = maxR; r >= 1; r--) {
+            if (isDoubleDesk) {
+                const numPairs = Math.ceil(maxC / 2);
+                for (let k = 0; k < numPairs; k++) {
+                    const c_left = maxC - 2 * k;
+                    const c_right = maxC - (2 * k + 1);
+                    
+                    const keyLeft = `${r},${c_left}`;
+                    const occupiedLeft = seatMap[keyLeft];
+                    
+                    if (c_right >= 1) {
+                        const keyRight = `${r},${c_right}`;
+                        const occupiedRight = seatMap[keyRight];
+                        
+                        gridHTML += `
+                            <div class="col-span-2 flex flex-col justify-between p-1.5 border border-brown-200 dark:border-slate-650 bg-brown-100/40 dark:bg-slate-750/30 rounded-xl shadow-sm gap-1">
+                                <!-- Chairs Row -->
+                                <div class="grid grid-cols-2 gap-1.5">
+                                    ${renderClassEditorChairHTML(r, c_left, occupiedLeft)}
+                                    ${renderClassEditorChairHTML(r, c_right, occupiedRight)}
+                                </div>
+                                <!-- Desk -->
+                                <div class="py-0.5 bg-gray-250 dark:bg-slate-700 rounded text-center text-[7px] font-extrabold text-gray-500 dark:text-slate-400 uppercase tracking-widest border border-gray-300 dark:border-slate-600">
+                                    Meja
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        // Single fallback for odd column count
+                        gridHTML += `
+                            <div class="col-span-1 flex flex-col justify-between p-1.5 border border-brown-200 dark:border-slate-650 bg-brown-100/40 dark:bg-slate-750/30 rounded-xl shadow-sm gap-1">
+                                ${renderClassEditorChairHTML(r, c_left, occupiedLeft)}
+                                <!-- Desk -->
+                                <div class="py-0.5 bg-gray-250 dark:bg-slate-700 rounded text-center text-[7px] font-extrabold text-gray-500 dark:text-slate-400 uppercase tracking-widest border border-gray-300 dark:border-slate-600">
+                                    Meja
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+            } else {
+                for (let c = maxC; c >= 1; c--) {
+                    const key = `${r},${c}`;
+                    const occupied = seatMap[key];
+                    
+                    gridHTML += `
+                        <div class="col-span-1 flex flex-col justify-between p-1.5 border border-brown-200 dark:border-slate-650 bg-brown-100/40 dark:bg-slate-750/30 rounded-xl shadow-sm gap-1">
+                            ${renderClassEditorChairHTML(r, c, occupied)}
+                            <!-- Desk -->
+                            <div class="py-0.5 bg-gray-250 dark:bg-slate-700 rounded text-center text-[7px] font-extrabold text-gray-500 dark:text-slate-400 uppercase tracking-widest border border-gray-300 dark:border-slate-600">
+                                Meja
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        gridHTML += `</div>`;
+        wrapper.innerHTML = gridHTML;
+
+        // Attach seat click listener
+        wrapper.querySelectorAll('[data-row]').forEach(cell => {
+            const r = parseInt(cell.dataset.row);
+            const c = parseInt(cell.dataset.col);
+            cell.onclick = (e) => {
+                e.stopPropagation();
+                showSeatPickerMenu(cell, r, c);
+            };
+        });
+    }
+
+    function showSeatPickerMenu(targetCell, row, col) {
+        if (seatPickerMenu) seatPickerMenu.remove();
+        
+        seatPickerMenu = document.createElement('div');
+        seatPickerMenu.className = 'absolute z-50 bg-white dark:bg-slate-800 border border-gray-255 dark:border-slate-700 shadow-2xl rounded-xl p-3 w-56 max-h-64 overflow-y-auto';
+        
+        const currentClass = db.classes[currentClassIndex];
+        const occupiedBy = currentClass.students.find(s => s.seatRow === row && s.seatCol === col);
+        
+        let html = `
+            <div class="text-[10px] uppercase tracking-wider font-extrabold text-gray-400 dark:text-slate-500 mb-2 border-b border-gray-100 dark:border-slate-700 pb-1.5 flex justify-between items-center">
+                <span>Pilih Murid (B${row}-K${col})</span>
+                <button type="button" id="btn-close-seat-picker" class="text-gray-400 hover:text-gray-650 dark:hover:text-slate-350 font-bold">✕</button>
+            </div>
+            <div class="space-y-1">
+                <button type="button" class="w-full text-left px-2 py-1.5 text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 rounded font-semibold transition-colors btn-assign-student" data-student-id="clear">
+                    ✕ Kosongkan Kursi
+                </button>
+        `;
+        
+        // Sort students: unassigned first, then assigned
+        const sortedStudents = [...currentClass.students].sort((a, b) => {
+            const aAssigned = a.seatRow && a.seatCol;
+            const bAssigned = b.seatRow && b.seatCol;
+            if (aAssigned && !bAssigned) return 1;
+            if (!aAssigned && bAssigned) return -1;
+            return a.nama.localeCompare(b.nama);
+        });
+        
+        sortedStudents.forEach(s => {
+            const isSelected = occupiedBy && occupiedBy.id === s.id;
+            const otherSeat = s.seatRow && s.seatCol && (!occupiedBy || occupiedBy.id !== s.id) ? `B${s.seatRow}-K${s.seatCol}` : '';
+            const statusText = otherSeat ? ` (${otherSeat})` : '';
+            const activeClass = isSelected ? 'bg-brown-50 dark:bg-brown-950/30 text-brown-600 dark:text-brown-300 font-bold' : 'text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700';
+            
+            html += `
+                <button type="button" class="w-full text-left px-2 py-1.5 text-xs rounded transition-colors flex justify-between items-center btn-assign-student ${activeClass}" data-student-id="${s.id}">
+                    <span class="truncate">${s.nama}</span>
+                    <span class="text-[9px] text-gray-400 dark:text-slate-500">${statusText}</span>
+                </button>
+            `;
+        });
+        
+        html += `</div>`;
+        seatPickerMenu.innerHTML = html;
+        
+        // Append to the parent container of the grid (so it absolute-positions relative to it)
+        const container = document.getElementById('interactive-layout-grid-wrapper').parentNode;
+        container.appendChild(seatPickerMenu);
+        
+        // Position menu near the targetCell
+        const rect = targetCell.getBoundingClientRect();
+        const parentRect = container.getBoundingClientRect();
+        let left = rect.left - parentRect.left + (rect.width / 2) - 112; // center align
+        let top = rect.bottom - parentRect.top + 8;
+        
+        // Overflow checks
+        if (left < 10) left = 10;
+        if (left + 224 > parentRect.width - 10) left = parentRect.width - 234;
+        if (top + 256 > parentRect.height - 10) {
+            top = rect.top - parentRect.top - 200; // Position above if overflows
+        }
+        if (top < 10) top = 10;
+        
+        seatPickerMenu.style.left = `${left}px`;
+        seatPickerMenu.style.top = `${top}px`;
+        
+        // Close button handler
+        seatPickerMenu.querySelector('#btn-close-seat-picker').onclick = (e) => {
+            e.stopPropagation();
+            seatPickerMenu.remove();
+            seatPickerMenu = null;
+        };
+        
+        // Assign student click handler
+        seatPickerMenu.querySelectorAll('.btn-assign-student').forEach(btn => {
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                const studentId = btn.getAttribute('data-student-id');
+                
+                recordState();
+                
+                // Clear current seat occupancy
+                currentClass.students.forEach(s => {
+                    if (s.seatRow === row && s.seatCol === col) {
+                        s.seatRow = null;
+                        s.seatCol = null;
+                    }
+                });
+                
+                if (studentId !== 'clear') {
+                    const targetStudent = currentClass.students.find(s => s.id === studentId);
+                    if (targetStudent) {
+                        targetStudent.seatRow = row;
+                        targetStudent.seatCol = col;
+                    }
+                }
+                
+                saveDB();
+                seatPickerMenu.remove();
+                seatPickerMenu = null;
+                
+                // Re-render seating grid & main table
+                renderSeatingGrid(currentClass);
+                renderTable();
+            };
+        });
+    }
+
+    // Close seat picker menu if clicked outside
+    document.addEventListener('click', (e) => {
+        if (seatPickerMenu && !seatPickerMenu.contains(e.target) && !e.target.closest('[data-row]')) {
+            seatPickerMenu.remove();
+            seatPickerMenu = null;
+        }
+    });
+
+    function hideSeatPopover() {
+        if (seatPopover) {
+            seatPopover.classList.add('pointer-events-none');
+            seatPopover.classList.remove('opacity-100');
+            delete seatPopover.dataset.activeStudentIdx;
+        }
+    }
+
+    // Document listener for click-away to close seating popover
+    document.addEventListener('click', (e) => {
+        if (seatPopover && seatPopover.classList.contains('opacity-100')) {
+            if (!seatPopover.contains(e.target) && !e.target.closest('.cell-seat')) {
+                hideSeatPopover();
+            }
+        }
+    });
+
     btnOpenClassModal.onclick = () => openModal(modalClass);
     closeClassModal.onclick = () => closeModal(modalClass);
     if(closeExportModal) closeExportModal.onclick = () => closeModal(modalExport);
@@ -983,12 +1553,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     closeStudentModal.onclick = () => closeModal(modalStudent);
 
-    // Create Class
     btnSubmitClass.onclick = () => {
         const grade = document.getElementById('input-class-grade').value;
         const group = document.getElementById('input-class-group').value.trim();
         const year1Str = document.getElementById('input-class-year1').value;
         const year2Str = document.getElementById('input-class-year2').value;
+        const sched1 = document.getElementById('input-class-sched1') ? document.getElementById('input-class-sched1').value.trim() : '';
+        const sched2 = document.getElementById('input-class-sched2') ? document.getElementById('input-class-sched2').value.trim() : '';
         
         if (!grade || !group) return alert('Pilih Tingkat dan Rombel kelas!');
         if (!year1Str || !year2Str) return alert('Isi Tahun Ajaran terlebih dahulu!');
@@ -1020,6 +1591,11 @@ document.addEventListener('DOMContentLoaded', () => {
             harianDates: [],
             utsDate: '',
             uasDate: '',
+            sched1: sched1,
+            sched2: sched2,
+            seatRows: 6,
+            seatCols: 6,
+            seatType: 'single',
             students: []
         };
 
@@ -1029,6 +1605,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('input-class-group').value = '';
         document.getElementById('input-class-year1').value = '';
         document.getElementById('input-class-year2').value = '';
+        if (document.getElementById('input-class-sched1')) document.getElementById('input-class-sched1').value = '';
+        if (document.getElementById('input-class-sched2')) document.getElementById('input-class-sched2').value = '';
         closeModal(modalClass);
         
         currentYear = year;
@@ -1086,43 +1664,87 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetClasses.length === 0) return alert('Tidak ada kelas di tahun ajaran tersebut.');
 
             const wb = XLSX.utils.book_new();
-            const data = [];
-            const rowMetadata = [];
             
-            // Cari jumlah harian maksimal agar kolom tabel sejajar jika digabung
-            let maxHarianCount = 0;
-            targetClasses.forEach(cls => {
-                if (cls.harianCount > maxHarianCount) maxHarianCount = cls.harianCount;
-            });
+            // --- Styling Constants ---
+            const borderAll = {
+                top: { style: "thin", color: { rgb: "D1D5DB" } },
+                bottom: { style: "thin", color: { rgb: "D1D5DB" } },
+                left: { style: "thin", color: { rgb: "D1D5DB" } },
+                right: { style: "thin", color: { rgb: "D1D5DB" } }
+            };
 
-            // 1. Global Title (DAFTAR NILAI TAHUN AJARAN XXXX/XXXX)
-            data.push([`DAFTAR NILAI TAHUN AJARAN ${selectedYear}`]);
-            rowMetadata.push({ type: 'main_title' });
+            const titleStyle = { 
+                font: { bold: true, sz: 14, color: { rgb: "111827" }, name: "Inter" },
+                alignment: { horizontal: "center", vertical: "center" }
+            };
+            const mainSubStyle = {
+                font: { sz: 10.5, color: { rgb: "4B5563" }, name: "Inter" },
+                alignment: { horizontal: "center", vertical: "center" }
+            };
+            const subTitleStyle = { 
+                font: { bold: true, sz: 11, color: { rgb: "111827" }, name: "Inter" } 
+            };
             
-            const prof = db.profile || { name: "Ibu R. Bangun S.Pd", mapel: "Matematika" };
-            data.push([`Mata Pelajaran: ${prof.mapel}`]);
-            rowMetadata.push({ type: 'main_subtitle' });
-            data.push([`Guru Pengajar: ${prof.name}`]);
-            rowMetadata.push({ type: 'main_subtitle' });
-            
-            data.push([]);
-            rowMetadata.push({ type: 'empty' });
+            const headerStyle = {
+                font: { bold: true, color: { rgb: "1F2937" }, sz: 10, name: "Inter" },
+                fill: { fgColor: { rgb: "F3F4F6" } }, // light gray
+                border: borderAll,
+                alignment: { horizontal: "center", vertical: "center" }
+            };
+
+            const colorRed = { rgb: "FEE2E2" }; // red-50
+            const colorRedText = { rgb: "B91C1C" }; // red-700
+            const colorWhite = { rgb: "FFFFFF" };
+            const colorBlack = { rgb: "1F2937" }; // gray-800
 
             targetClasses.forEach(cls => {
+                const data = [];
+                const rowMetadata = [];
+                const maxHarianCount = cls.harianCount || 2;
+
+                // 1. Global Title (DAFTAR NILAI TAHUN AJARAN XXXX/XXXX)
+                data.push([`DAFTAR NILAI TAHUN AJARAN ${selectedYear}`]);
+                rowMetadata.push({ type: 'main_title' });
+                
+                const prof = db.profile || { name: "R. Bangun S.Pd", mapel: "Matematika" };
+                
+                const formatValue = (val) => {
+                    if (!val || val.trim() === '-' || val.trim().toLowerCase() === 'opsional') {
+                        return ": -";
+                    }
+                    let clean = val.trim();
+                    if (clean.startsWith('(') && clean.endsWith(')')) {
+                        return `: ${clean}`;
+                    }
+                    return `: (${clean})`;
+                };
+
+                data.push([`Mata Pelajaran`, '', formatValue(prof.mapel)]);
+                rowMetadata.push({ type: 'meta_row' });
+                
+                data.push([`Guru Pengampu`, '', formatValue(prof.name)]);
+                rowMetadata.push({ type: 'meta_row' });
+
+                data.push([`Hari/Jam Pelajaran 1`, '', formatValue(cls.sched1)]);
+                rowMetadata.push({ type: 'meta_row' });
+
+                data.push([`Hari/Jam Pelajaran 2`, '', formatValue(cls.sched2)]);
+                rowMetadata.push({ type: 'meta_row' });
+                
+                data.push([]);
+                rowMetadata.push({ type: 'empty' });
+
                 // 2. Class Subtitle (KELAS | : | Nama Kelas) dipisah tiap cell
-                // Agar tulisan tidak terpotong karena kolom A ukurannya kecil (No), 
-                // kita taruh KELAS di A, ':' di B, Nama Kelas di C.
                 let classNameStr = cls.name.toUpperCase();
                 if(classNameStr.startsWith('KELAS ')) {
                     classNameStr = classNameStr.replace('KELAS ', '');
                 }
                 
-                // KELAS di A, ': XX-X' di B
-                data.push(['KELAS', `: ${classNameStr}`]);
+                data.push(['KELAS', '', `: ${classNameStr}`]);
                 rowMetadata.push({ type: 'class_subtitle' });
                 
                 // Table Headers
-                const headers = ['No', 'NIS', 'Nama Lengkap', 'L/P'];
+                const headers = ['No', 'NIS', 'Nama Lengkap', 'L/P', 'Tempat Duduk'];
                 for (let i = 0; i < maxHarianCount; i++) {
                     headers.push(`Harian ${i + 1}`);
                 }
@@ -1132,7 +1754,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Table Data (Students)
                 cls.students.forEach((student, index) => {
-                    const row = [index + 1, student.nis, student.nama, student.jk || '-'];
+                    const seatStr = student.seatRow && student.seatCol ? `B${student.seatRow}-K${student.seatCol}` : '-';
+                    const row = [index + 1, student.nis, student.nama, student.jk || '-', seatStr];
                     
                     let sumHarian = 0;
                     let countHarian = 0;
@@ -1162,157 +1785,130 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     const hasScore = countHarian > 0 || uts !== '' || uas !== '';
                     const isMerah = hasScore && finalScore < 75;
-                    const isKetua = (cls.ketuaId === student.id);
                     
                     rowMetadata.push({ 
                         type: 'student', 
                         isMerah: isMerah, 
-                        isKetua: isKetua,
+                        isKetua: false,
+                        namaCol: 2,
+                        finalScoreCol: row.length - 2,
                         catatanCol: row.length - 1
                     });
                 });
                 
-                // Gap between classes
-                data.push([]);
-                rowMetadata.push({ type: 'empty' });
-                data.push([]);
-                rowMetadata.push({ type: 'empty' });
+                // Create Sheet
+                const ws = XLSX.utils.aoa_to_sheet(data);
+                
+                // Terapkan style ke masing-masing cell
+                for (const cellAddress in ws) {
+                    if (cellAddress.startsWith('!')) continue;
+                    
+                    const cell = ws[cellAddress];
+                    const col = cellAddress.replace(/[0-9]/g, '');
+                    const row = parseInt(cellAddress.replace(/[a-zA-Z]/g, '')) - 1; // 0-indexed
+                    
+                    if (!rowMetadata[row]) continue;
+                    const meta = rowMetadata[row];
+
+                    if (meta.type === 'main_title') {
+                        cell.s = titleStyle;
+                    } else if (meta.type === 'meta_row') {
+                        const colIdx = XLSX.utils.decode_col(col);
+                        if (colIdx === 0) {
+                            cell.s = {
+                                font: { bold: true, name: "Inter", sz: 10 },
+                                alignment: { horizontal: "left", vertical: "center" }
+                            };
+                        } else if (colIdx === 2) {
+                            cell.s = {
+                                font: { name: "Inter", sz: 10 },
+                                alignment: { horizontal: "left", vertical: "center" }
+                            };
+                        }
+                    } else if (meta.type === 'class_subtitle') {
+                        const colIdx = XLSX.utils.decode_col(col);
+                        if (colIdx === 0 || colIdx === 2) {
+                            cell.s = {
+                                font: { bold: true, name: "Inter", sz: 11 },
+                                alignment: { horizontal: "left", vertical: "center" }
+                            };
+                        }
+                    } else if (meta.type === 'header') {
+                        cell.s = headerStyle;
+                    } else if (meta.type === 'student') {
+                        const colIdx = XLSX.utils.decode_col(col);
+                        const isLeftAlign = (colIdx === meta.namaCol || colIdx === meta.catatanCol);
+                        const align = isLeftAlign ? "left" : "center";
+                        
+                        let fgColor = colorWhite;
+                        let fontColor = colorBlack;
+                        let fontBold = false;
+                        
+                        if (colIdx === meta.finalScoreCol && meta.isMerah) {
+                            fgColor = colorRed;
+                            fontColor = colorRedText;
+                            fontBold = true;
+                        }
+                        
+                        cell.s = {
+                            font: { bold: fontBold, color: fontColor, name: "Inter", sz: 10 },
+                            fill: { fgColor: fgColor },
+                            border: borderAll,
+                            alignment: { horizontal: align, vertical: "center" }
+                        };
+                    }
+                    
+                    // Set standard text formatting for student rows to prevent Excel auto-formatting numbers
+                    if (meta.type === 'student') {
+                        cell.z = "@";
+                    }
+                }
+
+                // --- Set Column Widths ---
+                const colWidths = [
+                    { wch: 8 },   // No
+                    { wch: 12 },  // NIS
+                    { wch: 30 },  // Nama Lengkap
+                    { wch: 6 },   // L/P
+                    { wch: 15 }   // Tempat Duduk
+                ];
+                
+                for (let i = 0; i < maxHarianCount; i++) {
+                    colWidths.push({ wch: 10 });
+                }
+                
+                colWidths.push(
+                    { wch: 10 }, // UTS
+                    { wch: 10 }, // UAS
+                    { wch: 12 }, // Nilai Akhir
+                    { wch: 40 }  // Catatan
+                );
+                ws['!cols'] = colWidths;
+
+                // --- Set Row Heights dynamically based on row type ---
+                const rowHeights = rowMetadata.map(meta => {
+                    if (meta.type === 'main_title') return { hpt: 28 };
+                    if (meta.type === 'meta_row') return { hpt: 20 };
+                    if (meta.type === 'class_subtitle') return { hpt: 24 };
+                    if (meta.type === 'header') return { hpt: 24 };
+                    if (meta.type === 'student') return { hpt: 20 };
+                    return { hpt: 12 }; // Spacer/empty rows
+                });
+                ws['!rows'] = rowHeights;
+                
+                // --- Merge Cells ---
+                ws['!merges'] = [
+                    { s: { r: 0, c: 0 }, e: { r: 0, c: colWidths.length - 1 } },
+                    { s: { r: 1, c: 0 }, e: { r: 1, c: 1 } },
+                    { s: { r: 2, c: 0 }, e: { r: 2, c: 1 } },
+                    { s: { r: 3, c: 0 }, e: { r: 3, c: 1 } },
+                    { s: { r: 4, c: 0 }, e: { r: 4, c: 1 } },
+                    { s: { r: 6, c: 0 }, e: { r: 6, c: 1 } }
+                ];
+                
+                let sheetName = cls.name.replace(/[\\\/\?\*\[\]\:]/g, "").substring(0, 31);
+                XLSX.utils.book_append_sheet(wb, ws, sheetName);
             });
-            
-            // Create Sheet
-            const ws = XLSX.utils.aoa_to_sheet(data);
-            
-            // --- Styling Definition ---
-            const borderAll = {
-                top: { style: "thin", color: { rgb: "D1D5DB" } },
-                bottom: { style: "thin", color: { rgb: "D1D5DB" } },
-                left: { style: "thin", color: { rgb: "D1D5DB" } },
-                right: { style: "thin", color: { rgb: "D1D5DB" } }
-            };
-
-            const titleStyle = { 
-                font: { bold: true, sz: 14, color: { rgb: "1E3A8A" }, name: "Inter" },
-                fill: { fgColor: { rgb: "EFF6FF" } },
-                alignment: { horizontal: "center", vertical: "center" }
-            };
-            const mainSubStyle = {
-                font: { bold: true, sz: 11, color: { rgb: "4B5563" }, name: "Inter" },
-                fill: { fgColor: { rgb: "EFF6FF" } },
-                alignment: { horizontal: "center", vertical: "center" }
-            };
-            const subTitleStyle = { 
-                font: { bold: true, sz: 11, color: { rgb: "1E3A8A" }, name: "Inter" } 
-            };
-            
-            const headerStyle = {
-                font: { bold: true, color: { rgb: "FFFFFF" }, sz: 10, name: "Inter" },
-                fill: { fgColor: { rgb: "1E3A8A" } }, // blue-900
-                border: borderAll,
-                alignment: { horizontal: "center", vertical: "center" }
-            };
-
-            // Colors for conditional formatting
-            const colorRed = { rgb: "FEE2E2" }; // red-50
-            const colorRedText = { rgb: "DC2626" }; // red-600
-            const colorYellow = { rgb: "FEF08A" }; // yellow-200
-            const colorYellowText = { rgb: "854D0E" }; // yellow-800
-            const colorWhite = { rgb: "FFFFFF" };
-            const colorBlack = { rgb: "000000" };
-            
-            function getStudentStyle(isMerah, isKetua, align) {
-                let fgColor = colorWhite;
-                let fontColor = colorBlack;
-                let fontBold = false;
-                
-                // Ketua Kelas is prioritized for background color (Yellow)
-                if (isKetua) { 
-                    fgColor = colorYellow; 
-                    fontColor = colorYellowText;
-                    fontBold = true; 
-                }
-                // Remedial is Red
-                else if (isMerah) { 
-                    fgColor = colorRed; 
-                    fontColor = colorRedText;
-                    fontBold = true; 
-                }
-                
-                return {
-                    font: { bold: fontBold, color: fontColor, name: "Inter", sz: 10 },
-                    fill: { fgColor: fgColor },
-                    border: borderAll,
-                    alignment: { horizontal: align, vertical: "center" }
-                };
-            }
-
-            // Terapkan style ke masing-masing cell
-            for (const cellAddress in ws) {
-                if (cellAddress.startsWith('!')) continue;
-                
-                const cell = ws[cellAddress];
-                const col = cellAddress.replace(/[0-9]/g, '');
-                const row = parseInt(cellAddress.replace(/[a-zA-Z]/g, '')) - 1; // 0-indexed
-                
-                if (!rowMetadata[row]) continue;
-                const meta = rowMetadata[row];
-
-                if (meta.type === 'main_title') {
-                    cell.s = titleStyle;
-                } else if (meta.type === 'main_subtitle') {
-                    cell.s = mainSubStyle;
-                } else if (meta.type === 'class_subtitle') {
-                    cell.s = subTitleStyle;
-                } else if (meta.type === 'header') {
-                    cell.s = headerStyle;
-                } else if (meta.type === 'student') {
-                    const isLeftAlign = (col === 'C' || col === XLSX.utils.encode_col(meta.catatanCol));
-                    const align = isLeftAlign ? "left" : "center";
-                    cell.s = getStudentStyle(meta.isMerah, meta.isKetua, align);
-                }
-            }
-
-            // --- Set Column Widths ---
-            const colWidths = [
-                { wch: 8 },   // No (diperlebar agar 'KELAS' muat)
-                { wch: 12 },  // NIS
-                { wch: 30 },  // Nama Lengkap
-                { wch: 6 }    // L/P
-            ];
-            
-            for (let i = 0; i < maxHarianCount; i++) {
-                colWidths.push({ wch: 10 });
-            }
-            
-            colWidths.push(
-                { wch: 10 }, // UTS
-                { wch: 10 }, // UAS
-                { wch: 12 }, // Nilai Akhir
-                { wch: 40 }  // Catatan
-            );
-            
-            ws['!cols'] = colWidths;
-
-            // --- Set Row Heights dynamically based on row type ---
-            const rowHeights = rowMetadata.map(meta => {
-                if (meta.type === 'main_title') return { hpt: 28 };
-                if (meta.type === 'main_subtitle') return { hpt: 18 };
-                if (meta.type === 'class_subtitle') return { hpt: 24 };
-                if (meta.type === 'header') return { hpt: 24 };
-                if (meta.type === 'student') return { hpt: 20 };
-                return { hpt: 12 }; // Spacer/empty rows
-            });
-            ws['!rows'] = rowHeights;
-            
-            // --- Merge Cells ---
-            // Merge baris judul (Baris 0, 1, 2 dari Kolom 0 sampai kolom terakhir)
-            ws['!merges'] = [
-                { s: { r: 0, c: 0 }, e: { r: 0, c: colWidths.length - 1 } },
-                { s: { r: 1, c: 0 }, e: { r: 1, c: colWidths.length - 1 } },
-                { s: { r: 2, c: 0 }, e: { r: 2, c: colWidths.length - 1 } }
-            ];
-            
-            let sheetName = `Rekap Tahun ${selectedYear.replace(/[^a-zA-Z0-9]/g, '')}`.substring(0, 31);
-            XLSX.utils.book_append_sheet(wb, ws, sheetName);
             
             const fileName = `Rekap_Semua_Kelas_${selectedYear.replace(/[\\/\\s]/g, '-')}.xlsx`;
             XLSX.writeFile(wb, fileName);
@@ -1322,9 +1918,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Create Student
     btnSubmitStudent.onclick = () => {
-        const nis = document.getElementById('input-student-nis').value;
-        const name = document.getElementById('input-student-name').value;
+        const nis = document.getElementById('input-student-nis').value.trim();
+        const name = document.getElementById('input-student-name').value.trim();
         const jk = document.getElementById('input-student-jk').value;
+        const seatRowVal = document.getElementById('input-student-seat-row').value;
+        const seatColVal = document.getElementById('input-student-seat-col').value;
 
         if (!nis || !name || !jk) return alert('Semua data (NIS, Nama, Jenis Kelamin) harus diisi!');
 
@@ -1337,7 +1935,9 @@ document.addEventListener('DOMContentLoaded', () => {
             harian: [],
             uts: null,
             uas: null,
-            catatan: ""
+            catatan: "",
+            seatRow: seatRowVal ? parseInt(seatRowVal) : null,
+            seatCol: seatColVal ? parseInt(seatColVal) : null
         };
 
         db.classes[currentClassIndex].students.push(newStudent);
@@ -1345,6 +1945,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('input-student-nis').value = '';
         document.getElementById('input-student-name').value = '';
+        document.getElementById('input-student-seat-row').value = '';
+        document.getElementById('input-student-seat-col').value = '';
         closeModal(modalStudent);
         
         renderTable();
@@ -1387,7 +1989,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (inputEditClassGroup) inputEditClassGroup.value = group;
             if (inputEditClassYear1) inputEditClassYear1.value = y1;
             if (inputEditClassYear2) inputEditClassYear2.value = y2;
+            if (document.getElementById('input-edit-class-sched1')) {
+                document.getElementById('input-edit-class-sched1').value = cls.sched1 || "";
+            }
+            if (document.getElementById('input-edit-class-sched2')) {
+                document.getElementById('input-edit-class-sched2').value = cls.sched2 || "";
+            }
             
+            
+            // Initialize Seating Editor inside Edit Class Modal
+            const activeR = cls.seatRows || 6;
+            const activeC = cls.seatCols || 6;
+            renderLayoutGridSelector(activeR, activeC);
+            updateSeatTypeToggle(cls);
+            renderSeatingGrid(cls);
+
             openModal(modalEditClass);
         });
     }
@@ -1402,6 +2018,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const group = inputEditClassGroup.value.trim();
             const year1Str = inputEditClassYear1.value;
             const year2Str = inputEditClassYear2.value;
+            const sched1 = document.getElementById('input-edit-class-sched1') ? document.getElementById('input-edit-class-sched1').value.trim() : '';
+            const sched2 = document.getElementById('input-edit-class-sched2') ? document.getElementById('input-edit-class-sched2').value.trim() : '';
             
             if (!grade || !group) return alert('Pilih Tingkat dan isi Rombel kelas!');
             if (!year1Str || !year2Str) return alert('Isi Tahun Ajaran terlebih dahulu!');
@@ -1428,6 +2046,8 @@ document.addEventListener('DOMContentLoaded', () => {
             recordState();
             cls.name = name;
             cls.tahunAjaran = year;
+            cls.sched1 = sched1;
+            cls.sched2 = sched2;
             saveDB();
             
             closeModal(modalEditClass);
@@ -1435,6 +2055,49 @@ document.addEventListener('DOMContentLoaded', () => {
             currentYear = year;
             currentClassId = cls.id;
             loadYearDropdown();
+        };
+    }
+
+    function updateSeatTypeToggle(cls) {
+        const btnSingle = document.getElementById('btn-seat-type-single');
+        const btnDouble = document.getElementById('btn-seat-type-double');
+        if (!btnSingle || !btnDouble) return;
+        
+        const isDouble = (cls.seatType === 'double');
+        
+        if (isDouble) {
+            btnDouble.className = "px-3.5 py-2 text-xs font-bold rounded-e-lg border border-brown-600 bg-brown-600 text-white dark:bg-brown-500 dark:border-brown-500 transition-colors focus:z-10";
+            btnSingle.className = "px-3.5 py-2 text-xs font-bold rounded-s-lg border border-gray-250 bg-white text-gray-700 hover:bg-gray-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-700 transition-colors focus:z-10";
+        } else {
+            btnSingle.className = "px-3.5 py-2 text-xs font-bold rounded-s-lg border border-brown-600 bg-brown-600 text-white dark:bg-brown-500 dark:border-brown-500 transition-colors focus:z-10";
+            btnDouble.className = "px-3.5 py-2 text-xs font-bold rounded-e-lg border-t border-b border-r border-gray-250 bg-white text-gray-700 hover:bg-gray-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-700 transition-colors focus:z-10";
+        }
+    }
+
+    const btnSeatTypeSingle = document.getElementById('btn-seat-type-single');
+    const btnSeatTypeDouble = document.getElementById('btn-seat-type-double');
+    
+    if (btnSeatTypeSingle && btnSeatTypeDouble) {
+        btnSeatTypeSingle.onclick = () => {
+            if (currentClassIndex === -1) return;
+            const cls = db.classes[currentClassIndex];
+            recordState();
+            cls.seatType = 'single';
+            saveDB();
+            updateSeatTypeToggle(cls);
+            renderSeatingGrid(cls);
+            renderTable();
+        };
+        
+        btnSeatTypeDouble.onclick = () => {
+            if (currentClassIndex === -1) return;
+            const cls = db.classes[currentClassIndex];
+            recordState();
+            cls.seatType = 'double';
+            saveDB();
+            updateSeatTypeToggle(cls);
+            renderSeatingGrid(cls);
+            renderTable();
         };
     }
 
@@ -1449,6 +2112,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const nis = inputEditStudentNis.value.trim();
             const jk = inputEditStudentJk.value;
             const name = inputEditStudentName.value.trim();
+            const seatRowVal = document.getElementById('input-edit-student-seat-row') ? document.getElementById('input-edit-student-seat-row').value : '';
+            const seatColVal = document.getElementById('input-edit-student-seat-col') ? document.getElementById('input-edit-student-seat-col').value : '';
             
             if (!nis || !name) {
                 alert('NIS dan Nama Murid tidak boleh kosong!');
@@ -1474,6 +2139,8 @@ document.addEventListener('DOMContentLoaded', () => {
             student.nis = nis;
             student.jk = jk;
             student.nama = name;
+            student.seatRow = seatRowVal ? parseInt(seatRowVal) : null;
+            student.seatCol = seatColVal ? parseInt(seatColVal) : null;
             saveDB();
             
             closeModal(modalEditStudent);
@@ -1626,168 +2293,279 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnDownloadTemplate = document.getElementById('btn-download-template');
     if (btnDownloadTemplate) {
         btnDownloadTemplate.addEventListener('click', () => {
-            // Create data matching the columns (including beautiful titles and instructions)
-            const data = [
-                ["TEMPLATE IMPORT DAFTAR SISWA", "", ""], // Row 0 (A1:C1 merged)
-                ["Silahkan isi tabel dibawah sesuai NIS, Nama Lengkap Murid, dan Jenis Kelamin", "", ""], // Row 1 (A2:C2 merged)
-                ["", "", ""], // Row 2 (Spacer)
-                ["NIS (Nomor Induk)", "Nama Lengkap Murid", "Jenis Kelamin (L/P)"], // Row 3 (Headers)
-                ["1001", "CONTOH: Ahmad Fauzi", "L"], // Row 4 (Sample 1)
-                ["1002", "CONTOH: Siti Aminah", "P"], // Row 5 (Sample 2)
-                ["1003", "CONTOH: Budi Santoso", "L"]   // Row 6 (Sample 3)
-            ];
+            const targetYear = currentYear || "2024/2025";
+            let targetClasses = db.classes.filter(c => c.tahunAjaran === targetYear);
             
-            // Add 100 empty styled blank rows for easy input
-            for (let i = 0; i < 100; i++) {
-                data.push(["", "", ""]);
+            // If database has no classes for current year, generate a mock template class
+            if (targetClasses.length === 0) {
+                targetClasses = [{
+                    id: "mock_class",
+                    name: "Kelas VII-A",
+                    tahunAjaran: targetYear,
+                    harianCount: 4,
+                    sched1: "Senin, 07.00-08.45",
+                    sched2: "",
+                    students: [
+                        { id: "mock_1", nis: "24001", nama: "Ahmad Budi Santoso", jk: "L", harian: [85, 90, 88, 88], uts: 85, uas: 90, catatan: "Sangat aktif di kelas." },
+                        { id: "mock_2", nis: "24002", nama: "Citra Kirana", jk: "P", harian: [92, 95, 90, 90], uts: 88, uas: 92, catatan: "Pertahankan!" },
+                        { id: "mock_3", nis: "24003", nama: "Dion Wiyoko", jk: "L", harian: [78, 80, 82, 82], uts: 75, uas: 80, catatan: "Perbanyak latihan soal." },
+                        { id: "mock_4", nis: "24004", nama: "Eka Putri", jk: "P", harian: [88, 85, 90, 90], uts: 89, uas: 90, catatan: "" },
+                        { id: "mock_5", nis: "24005", nama: "Farhan Maulana", jk: "L", harian: [75, 78, 80, 80], uts: 76, uas: 82, catatan: "" },
+                        { id: "mock_6", nis: "24006", nama: "Gita Savitri", jk: "P", harian: [95, 98, 96, 96], uts: 95, uas: 97, catatan: "Teladan kelas." },
+                        { id: "mock_7", nis: "24007", nama: "Hendra Wijaya", jk: "L", harian: [80, 82, 85, 85], uts: 80, uas: 84, catatan: "" },
+                        { id: "mock_8", nis: "24008", nama: "Indah Permatasari", jk: "P", harian: [88, 90, 92, 92], uts: 89, uas: 91, catatan: "Aktif bertanya." },
+                        { id: "mock_9", nis: "24009", nama: "Bagas Satrio", jk: "L", harian: [82, 80, 85, 85], uts: 82, uas: 85, catatan: "" },
+                        { id: "mock_10", nis: "24010", nama: "Alya Nabila", jk: "P", harian: [90, 95, 88, 88], uts: 92, uas: 90, catatan: "" }
+                    ]
+                }];
             }
+
+            const wb = XLSX.utils.book_new();
             
-            // Generate sheet
-            const ws = XLSX.utils.aoa_to_sheet(data);
-            
-            // --- Premium Excel Visual Styling ---
-            const borderThin = {
+            // --- Styling Constants ---
+            const borderAll = {
                 top: { style: "thin", color: { rgb: "D1D5DB" } },
                 bottom: { style: "thin", color: { rgb: "D1D5DB" } },
                 left: { style: "thin", color: { rgb: "D1D5DB" } },
                 right: { style: "thin", color: { rgb: "D1D5DB" } }
             };
 
-            const titleStyle = {
-                font: { bold: true, sz: 14, color: { rgb: "1E3A8A" }, name: "Inter" },
-                fill: { fgColor: { rgb: "EFF6FF" } },
+            const titleStyle = { 
+                font: { bold: true, sz: 14, color: { rgb: "111827" }, name: "Inter" },
                 alignment: { horizontal: "center", vertical: "center" }
             };
-
-            const subtitleStyle = {
-                font: { italic: true, sz: 10, color: { rgb: "4B5563" }, name: "Inter" },
-                fill: { fgColor: { rgb: "EFF6FF" } },
-                alignment: { horizontal: "center", vertical: "center" }
-            };
-
-            const instructionStyle = {
-                font: { sz: 9.5, color: { rgb: "065F46" }, name: "Inter", bold: true },
-                fill: { fgColor: { rgb: "ECFDF5" } }, // Emerald-50
-                border: {
-                    top: { style: "thin", color: { rgb: "A7F3D0" } },
-                    bottom: { style: "thin", color: { rgb: "A7F3D0" } },
-                    left: { style: "thin", color: { rgb: "A7F3D0" } },
-                    right: { style: "thin", color: { rgb: "A7F3D0" } }
-                },
-                alignment: { horizontal: "center", vertical: "center", wrapText: true }
-            };
-
+            
             const headerStyle = {
-                font: { bold: true, color: { rgb: "FFFFFF" }, sz: 11, name: "Inter" },
-                fill: { fgColor: { rgb: "1E3A8A" } }, // Deep Navy
-                border: borderThin,
+                font: { bold: true, color: { rgb: "1F2937" }, sz: 10, name: "Inter" },
+                fill: { fgColor: { rgb: "F3F4F6" } }, // light gray
+                border: borderAll,
                 alignment: { horizontal: "center", vertical: "center" }
             };
 
-            const inputRowStyleNIS = {
-                font: { sz: 11, name: "Inter" },
-                border: borderThin,
-                alignment: { horizontal: "center", vertical: "center" }
-            };
+            const colorRed = { rgb: "FEE2E2" }; // red-50
+            const colorRedText = { rgb: "B91C1C" }; // red-700
+            const colorWhite = { rgb: "FFFFFF" };
+            const colorBlack = { rgb: "1F2937" }; // gray-800
 
-            const inputRowStyleNama = {
-                font: { sz: 11, name: "Inter" },
-                border: borderThin,
-                alignment: { horizontal: "left", vertical: "center" }
-            };
+            targetClasses.forEach(cls => {
+                const data = [];
+                const rowMetadata = [];
+                const maxHarianCount = cls.harianCount || 2;
 
-            const inputRowStyleJK = {
-                font: { sz: 11, name: "Inter" },
-                border: borderThin,
-                alignment: { horizontal: "center", vertical: "center" }
-            };
-
-            // Ensure all cells in the grid exist and apply styles
-            const totalRows = data.length;
-            const totalCols = 3; // Columns A, B, C
-
-            for (let r = 0; r < totalRows; r++) {
-                for (let c = 0; c < totalCols; c++) {
-                    const cellRef = XLSX.utils.encode_cell({ r: r, c: c });
-                    if (!ws[cellRef]) {
-                        ws[cellRef] = { v: "", t: "s" };
+                // 1. Global Title
+                data.push([`DAFTAR NILAI TAHUN AJARAN ${targetYear}`]);
+                rowMetadata.push({ type: 'main_title' });
+                
+                const prof = db.profile || { name: "R. Bangun S.Pd", mapel: "Matematika" };
+                
+                const formatValue = (val) => {
+                    if (!val || val.trim() === '-' || val.trim().toLowerCase() === 'opsional') {
+                        return ": -";
                     }
-                    const cell = ws[cellRef];
+                    let clean = val.trim();
+                    if (clean.startsWith('(') && clean.endsWith(')')) {
+                        return `: ${clean}`;
+                    }
+                    return `: (${clean})`;
+                };
 
-                    // Set standard text formatting for all cells to prevent Excel auto-formatting numbers
-                    cell.z = "@";
+                data.push([`Mata Pelajaran`, '', formatValue(prof.mapel)]);
+                rowMetadata.push({ type: 'meta_row' });
+                
+                data.push([`Guru Pengampu`, '', formatValue(prof.name)]);
+                rowMetadata.push({ type: 'meta_row' });
 
-                    if (r === 0) {
+                data.push([`Hari/Jam Pelajaran 1`, '', formatValue(cls.sched1)]);
+                rowMetadata.push({ type: 'meta_row' });
+
+                data.push([`Hari/Jam Pelajaran 2`, '', formatValue(cls.sched2)]);
+                rowMetadata.push({ type: 'meta_row' });
+                
+                data.push([]);
+                rowMetadata.push({ type: 'empty' });
+
+                // 2. Class Subtitle
+                let classNameStr = cls.name.toUpperCase();
+                if(classNameStr.startsWith('KELAS ')) {
+                    classNameStr = classNameStr.replace('KELAS ', '');
+                }
+                data.push(['KELAS', '', `: ${classNameStr}`]);
+                rowMetadata.push({ type: 'class_subtitle' });
+                
+                // Table Headers
+                const headers = ['No', 'NIS', 'Nama Lengkap', 'L/P', 'Tempat Duduk'];
+                for (let i = 0; i < maxHarianCount; i++) {
+                    headers.push(`Harian ${i + 1}`);
+                }
+                headers.push('UTS', 'UAS', 'Nilai Akhir', 'Catatan');
+                data.push(headers);
+                rowMetadata.push({ type: 'header' });
+                
+                // Table Data (Students)
+                cls.students.forEach((student, index) => {
+                    const seatStr = student.seatRow && student.seatCol ? `B${student.seatRow}-K${student.seatCol}` : '-';
+                    const row = [index + 1, student.nis, student.nama, student.jk || '-', seatStr];
+                    
+                    let sumHarian = 0;
+                    let countHarian = 0;
+                    const harianList = student.harian || [];
+                    for (let i = 0; i < maxHarianCount; i++) {
+                        const val = harianList[i] !== undefined && harianList[i] !== null && harianList[i] !== '' ? harianList[i] : '';
+                        row.push(val);
+                        if (val !== '') {
+                            sumHarian += parseFloat(val);
+                            countHarian++;
+                        }
+                    }
+                    
+                    const uts = student.uts !== null && student.uts !== '' ? student.uts : '';
+                    const uas = student.uas !== null && student.uas !== '' ? student.uas : '';
+                    row.push(uts, uas);
+                    
+                    const avgHarian = countHarian > 0 ? (sumHarian / countHarian) : 0;
+                    const w = db.weights || { harian: 40, uts: 30, uas: 30 };
+                    const utsVal = parseFloat(uts) || 0;
+                    const uasVal = parseFloat(uas) || 0;
+                    const finalScore = Math.round((avgHarian * (w.harian/100)) + (utsVal * (w.uts/100)) + (uasVal * (w.uas/100)));
+                    row.push(finalScore);
+                    row.push(student.catatan || '');
+                    
+                    data.push(row);
+                    
+                    const hasScore = countHarian > 0 || uts !== '' || uas !== '';
+                    const isMerah = hasScore && finalScore < 75;
+                    
+                    rowMetadata.push({ 
+                        type: 'student', 
+                        isMerah: isMerah, 
+                        isKetua: false,
+                        namaCol: 2,
+                        finalScoreCol: row.length - 2,
+                        catatanCol: row.length - 1
+                    });
+                });
+                
+                // Create Sheet
+                const ws = XLSX.utils.aoa_to_sheet(data);
+                
+                // Apply Styles
+                for (const cellAddress in ws) {
+                    if (cellAddress.startsWith('!')) continue;
+                    
+                    const cell = ws[cellAddress];
+                    const col = cellAddress.replace(/[0-9]/g, '');
+                    const row = parseInt(cellAddress.replace(/[a-zA-Z]/g, '')) - 1; // 0-indexed
+                    
+                    if (!rowMetadata[row]) continue;
+                    const meta = rowMetadata[row];
+
+                    if (meta.type === 'main_title') {
                         cell.s = titleStyle;
-                    } else if (r === 1) {
-                        cell.s = instructionStyle;
-                    } else if (r === 2) {
-                        // Spacer row
-                        cell.s = {
-                            fill: { fgColor: { rgb: "FFFFFF" } }
-                        };
-                    } else if (r === 3) {
+                    } else if (meta.type === 'meta_row') {
+                        const colIdx = XLSX.utils.decode_col(col);
+                        if (colIdx === 0) {
+                            cell.s = {
+                                font: { bold: true, name: "Inter", sz: 10 },
+                                alignment: { horizontal: "left", vertical: "center" }
+                            };
+                        } else if (colIdx === 2) {
+                            cell.s = {
+                                font: { name: "Inter", sz: 10 },
+                                alignment: { horizontal: "left", vertical: "center" }
+                            };
+                        }
+                    } else if (meta.type === 'class_subtitle') {
+                        const colIdx = XLSX.utils.decode_col(col);
+                        if (colIdx === 0 || colIdx === 2) {
+                            cell.s = {
+                                font: { bold: true, name: "Inter", sz: 11 },
+                                alignment: { horizontal: "left", vertical: "center" }
+                            };
+                        }
+                    } else if (meta.type === 'header') {
                         cell.s = headerStyle;
-                    } else {
-                        // Data rows
-                        const isSample = (r >= 4 && r <= 6);
-                        let baseStyle;
-                        if (c === 0) {
-                            baseStyle = JSON.parse(JSON.stringify(inputRowStyleNIS));
-                        } else if (c === 1) {
-                            baseStyle = JSON.parse(JSON.stringify(inputRowStyleNama));
-                        } else {
-                            baseStyle = JSON.parse(JSON.stringify(inputRowStyleJK));
+                    } else if (meta.type === 'student') {
+                        const colIdx = XLSX.utils.decode_col(col);
+                        const isLeftAlign = (colIdx === meta.namaCol || colIdx === meta.catatanCol);
+                        const align = isLeftAlign ? "left" : "center";
+                        
+                        let fgColor = colorWhite;
+                        let fontColor = colorBlack;
+                        let fontBold = false;
+                        
+                        if (colIdx === meta.finalScoreCol && meta.isMerah) {
+                            fgColor = colorRed;
+                            fontColor = colorRedText;
+                            fontBold = true;
                         }
-
-                        // Style sample rows slightly differently (italic, grey text) so they are visually distinct
-                        if (isSample) {
-                            baseStyle.font.color = { rgb: "9CA3AF" }; // Grey text
-                            baseStyle.font.italic = true;
-                        }
-
-                        cell.s = baseStyle;
+                        
+                        cell.s = {
+                            font: { bold: fontBold, color: fontColor, name: "Inter", sz: 10 },
+                            fill: { fgColor: fgColor },
+                            border: borderAll,
+                            alignment: { horizontal: align, vertical: "center" }
+                        };
+                    }
+                    
+                    // Set standard text formatting for data rows cell to prevent Excel auto-formatting numbers
+                    if (meta.type === 'student') {
+                        cell.z = "@";
                     }
                 }
-            }
 
-            // Set custom row heights for comfortable reading & entering data
-            ws['!rows'] = [
-                { hpt: 28 }, // Row 1 (Title)
-                { hpt: 26 }, // Row 2 (Instructions)
-                { hpt: 10 }, // Row 3 (Spacer)
-                { hpt: 25 }  // Row 4 (Headers)
-            ];
-            for (let i = 4; i < totalRows; i++) {
-                ws['!rows'].push({ hpt: 22 }); // Input rows
-            }
+                // --- Column Widths ---
+                const colWidths = [
+                    { wch: 8 },   // No
+                    { wch: 12 },  // NIS
+                    { wch: 30 },  // Nama Lengkap
+                    { wch: 6 },   // L/P
+                    { wch: 15 }   // Tempat Duduk
+                ];
+                
+                for (let i = 0; i < maxHarianCount; i++) {
+                    colWidths.push({ wch: 10 });
+                }
+                
+                colWidths.push(
+                    { wch: 10 }, // UTS
+                    { wch: 10 }, // UAS
+                    { wch: 12 }, // Nilai Akhir
+                    { wch: 40 }  // Catatan
+                );
+                ws['!cols'] = colWidths;
 
-            // Set column widths
-            ws['!cols'] = [
-                { wch: 18 }, // NIS
-                { wch: 38 }, // Nama Lengkap Murid
-                { wch: 25 }  // Jenis Kelamin (L/P)
-            ];
-
-            // Merge titles & instructions
-            ws['!merges'] = [
-                { s: { r: 0, c: 0 }, e: { r: 0, c: 2 } }, // A1:C1
-                { s: { r: 1, c: 0 }, e: { r: 1, c: 2 } }  // A2:C2
-            ];
+                // --- Row Heights ---
+                const rowHeights = rowMetadata.map(meta => {
+                    if (meta.type === 'main_title') return { hpt: 28 };
+                    if (meta.type === 'meta_row') return { hpt: 20 };
+                    if (meta.type === 'class_subtitle') return { hpt: 24 };
+                    if (meta.type === 'header') return { hpt: 24 };
+                    if (meta.type === 'student') return { hpt: 20 };
+                    return { hpt: 12 };
+                });
+                ws['!rows'] = rowHeights;
+                
+                // --- Merge Cells ---
+                ws['!merges'] = [
+                    { s: { r: 0, c: 0 }, e: { r: 0, c: colWidths.length - 1 } },
+                    { s: { r: 1, c: 0 }, e: { r: 1, c: 1 } },
+                    { s: { r: 2, c: 0 }, e: { r: 2, c: 1 } },
+                    { s: { r: 3, c: 0 }, e: { r: 3, c: 1 } },
+                    { s: { r: 4, c: 0 }, e: { r: 4, c: 1 } },
+                    { s: { r: 6, c: 0 }, e: { r: 6, c: 1 } }
+                ];
+                
+                let sheetName = cls.name.replace(/[\\\/\?\*\[\]\:]/g, "").substring(0, 31);
+                XLSX.utils.book_append_sheet(wb, ws, sheetName);
+            });
             
-            // Create workbook and download
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Daftar Siswa");
-            XLSX.writeFile(wb, "Template_Daftar_Siswa.xlsx");
+            const fileName = `Template_Import_Kelas_${targetYear.replace(/[\\/\\s]/g, '-')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         });
     }
 
     if (btnSubmitImport) {
         btnSubmitImport.addEventListener('click', () => {
-            if (currentClassIndex === -1) {
-                alert("Silakan pilih kelas terlebih dahulu.");
-                return;
-            }
             if (!inputImportFile.files || inputImportFile.files.length === 0) {
                 alert("Silakan pilih file terlebih dahulu.");
                 return;
@@ -1800,89 +2578,448 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     const data = new Uint8Array(e.target.result);
                     const workbook = XLSX.read(data, { type: 'array' });
+                    
                     const firstSheetName = workbook.SheetNames[0];
-                    const worksheet = workbook.Sheets[firstSheetName];
-                    const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                    const firstWorksheet = workbook.Sheets[firstSheetName];
+                    const firstJson = XLSX.utils.sheet_to_json(firstWorksheet, { header: 1 });
 
-                    if (json.length <= 1) {
+                    if (firstJson.length <= 1) {
                         alert("File kosong atau tidak memiliki data.");
                         return;
                     }
 
-                    const currentClass = db.classes[currentClassIndex];
-                    let importCount = 0;
-
-                    recordState();
-
-                    // Skip header row
-                    for (let i = 1; i < json.length; i++) {
-                        const row = json[i];
-                        if (!row || row.length === 0) continue;
-
-                        const nis = String(row[0] || '').trim();
-                        const nama = String(row[1] || '').trim();
-                        let jk = String(row[2] || '').trim().toUpperCase();
-
-                        if (!nis || !nama) continue;
-
-                        // Abaikan baris header, judul, petunjuk, dan contoh bawaan template
-                        const nisLower = nis.toLowerCase();
-                        const namaLower = nama.toLowerCase();
-                        if (nisLower === 'nis' || 
-                            nisLower.includes('template') || 
-                            nisLower.includes('petunjuk') ||
-                            namaLower.includes('nama lengkap') ||
-                            namaLower.includes('nama murid') ||
-                            namaLower.startsWith('contoh:') ||
-                            namaLower.includes('contoh')) {
-                            continue;
+                    // Robust check: see if "DAFTAR NILAI TAHUN AJARAN" or "KELAS" is present in the first sheet
+                    let isRekapExport = false;
+                    for (let r = 0; r < Math.min(firstJson.length, 10); r++) {
+                        const row = firstJson[r];
+                        if (row) {
+                            const hasTitle = row.some(cell => typeof cell === 'string' && cell.toUpperCase().includes('DAFTAR NILAI TAHUN AJARAN'));
+                            const hasKelas = row[0] === 'KELAS';
+                            if (hasTitle || hasKelas) {
+                                isRekapExport = true;
+                                break;
+                            }
                         }
-
-                        // Normalize L/P
-                        if (jk.startsWith('L') || jk === 'LAKI-LAKI') {
-                            jk = 'L';
-                        } else if (jk.startsWith('P') || jk === 'PEREMPUAN') {
-                            jk = 'P';
-                        } else {
-                            jk = 'L';
-                        }
-
-                        // Check if student already exists in this class by NIS
-                        const exists = currentClass.students.some(s => s.nis === nis);
-                        if (exists) continue;
-
-                        currentClass.students.push({
-                            id: "s_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9),
-                            nis: nis,
-                            nama: nama,
-                            jk: jk,
-                            harian: Array(currentClass.harianCount).fill(''),
-                            uts: '',
-                            uas: '',
-                            catatan: ''
-                        });
-                        importCount++;
                     }
-
-                    if (importCount > 0) {
+                    
+                    if (isRekapExport) {
+                        // Import/Restore/Sync Classes from Rekap Export File
+                        recordState();
+                        
+                        let newClasses = [];
+                        let updatedClasses = [];
+                        let newStudentsCount = 0;
+                        let updatedStudentsCount = 0;
+                        let parsedYear = "";
+                        
+                        // Loop through all sheets in the Excel workbook
+                        workbook.SheetNames.forEach(sheetName => {
+                            const worksheet = workbook.Sheets[sheetName];
+                            const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                            if (json.length === 0) return;
+                            
+                            // 1. Determine Year & Schedules
+                            let sheetYear = "";
+                            let sheetSched1 = "";
+                            let sheetSched2 = "";
+                            for (let r = 0; r < Math.min(json.length, 12); r++) {
+                                const row = json[r];
+                                if (row && row[0] && typeof row[0] === 'string') {
+                                    const firstCell = row[0].toUpperCase().trim();
+                                    if (firstCell.includes('DAFTAR NILAI TAHUN AJARAN')) {
+                                        const match = row[0].toUpperCase().match(/DAFTAR NILAI TAHUN AJARAN\s+(.+)/);
+                                        if (match && match[1]) {
+                                            sheetYear = match[1].trim();
+                                        }
+                                    } else if (firstCell.includes('HARI/JAM PELAJARAN 1')) {
+                                        let rawVal = String(row[2] || row[1] || '').trim();
+                                        if (rawVal.startsWith(':')) {
+                                            rawVal = rawVal.substring(1).trim();
+                                        }
+                                        if (rawVal.startsWith('(') && rawVal.endsWith(')')) {
+                                            rawVal = rawVal.substring(1, rawVal.length - 1).trim();
+                                        }
+                                        if (rawVal && rawVal.toLowerCase() !== 'opsional') {
+                                            sheetSched1 = rawVal;
+                                        }
+                                    } else if (firstCell.includes('HARI/JAM PELAJARAN 2')) {
+                                        let rawVal = String(row[2] || row[1] || '').trim();
+                                        if (rawVal.startsWith(':')) {
+                                            rawVal = rawVal.substring(1).trim();
+                                        }
+                                        if (rawVal.startsWith('(') && rawVal.endsWith(')')) {
+                                            rawVal = rawVal.substring(1, rawVal.length - 1).trim();
+                                        }
+                                        if (rawVal && rawVal.toLowerCase() !== 'opsional') {
+                                            sheetSched2 = rawVal;
+                                        }
+                                    }
+                                }
+                            }
+                            if (sheetYear) parsedYear = sheetYear;
+                            
+                            // 2. Determine Class Name
+                            let className = "";
+                            const genericNames = ['daftar siswa', 'sheet1', 'template', 'siswa', 'import', 'daftar_siswa', 'sheet 1'];
+                            if (!genericNames.includes(sheetName.trim().toLowerCase())) {
+                                className = sheetName.trim();
+                                if (!className.startsWith('Kelas')) {
+                                    className = `Kelas ${className}`;
+                                }
+                            }
+                            
+                            // Check if there is a KELAS row inside the sheet
+                            let cellClassName = "";
+                            for (let r = 0; r < Math.min(json.length, 12); r++) {
+                                const row = json[r];
+                                if (row && row[0] && typeof row[0] === 'string' && row[0].toUpperCase() === 'KELAS') {
+                                    let rawVal = String(row[2] || row[1] || '').trim();
+                                    if (rawVal.startsWith(':')) {
+                                        rawVal = rawVal.substring(1).trim();
+                                    }
+                                    if (rawVal) {
+                                        cellClassName = rawVal.startsWith('Kelas') ? rawVal : `Kelas ${rawVal}`;
+                                    }
+                                    break;
+                                }
+                            }
+                            
+                            // Prioritize sheet name if it's specific, fallback to cellClassName
+                            if (!className) {
+                                className = cellClassName || "Kelas Baru";
+                            }
+                            
+                            // 3. Find Header Row (NIS and Nama Lengkap)
+                            let headerRow = null;
+                            let headerRowIndex = -1;
+                            for (let r = 0; r < json.length; r++) {
+                                const row = json[r];
+                                if (row && Array.isArray(row)) {
+                                    const hasNis = row.some(cell => typeof cell === 'string' && cell.trim().toUpperCase() === 'NIS');
+                                    const hasNama = row.some(cell => typeof cell === 'string' && (cell.trim().toUpperCase() === 'NAMA LENGKAP' || cell.trim().toUpperCase() === 'NAMA' || cell.trim().toUpperCase() === 'NAMA MURID'));
+                                    if (hasNis && hasNama) {
+                                        headerRow = row;
+                                        headerRowIndex = r;
+                                        break;
+                                    }
+                                }
+                            }
+                            
+                            if (!headerRow) {
+                                // No header row found in this sheet, skip
+                                return;
+                            }
+                            
+                            // 4. Map columns case-insensitively with space trimming
+                            const nisCol = headerRow.findIndex(cell => typeof cell === 'string' && cell.trim().toUpperCase() === 'NIS');
+                            const namaCol = headerRow.findIndex(cell => typeof cell === 'string' && (cell.trim().toUpperCase() === 'NAMA LENGKAP' || cell.trim().toUpperCase() === 'NAMA' || cell.trim().toUpperCase() === 'NAMA MURID'));
+                            const jkCol = headerRow.findIndex(cell => typeof cell === 'string' && (cell.trim().toUpperCase() === 'L/P' || cell.trim().toUpperCase() === 'JK' || cell.trim().toUpperCase().includes('KELAMIN')));
+                            const seatCol = headerRow.findIndex(cell => typeof cell === 'string' && (cell.trim().toUpperCase() === 'TEMPAT DUDUK' || cell.trim().toUpperCase() === 'KOORDINAT' || cell.trim().toUpperCase() === 'SEAT' || cell.trim().toUpperCase().includes('DUDUK')));
+                            const UTSCol = headerRow.findIndex(cell => typeof cell === 'string' && cell.trim().toUpperCase() === 'UTS');
+                            const UASCol = headerRow.findIndex(cell => typeof cell === 'string' && cell.trim().toUpperCase() === 'UAS');
+                            const catatanCol = headerRow.findIndex(cell => typeof cell === 'string' && cell.trim().toUpperCase().startsWith('CATATAN'));
+                            
+                            // Map Harian columns case-insensitively
+                            const harianCols = [];
+                            headerRow.forEach((colName, colIdx) => {
+                                if (typeof colName === 'string') {
+                                    const colClean = colName.trim().toUpperCase();
+                                    if (colClean.startsWith('HARIAN ')) {
+                                        harianCols.push({
+                                            index: colIdx,
+                                            num: parseInt(colClean.replace('HARIAN ', '')) || 1
+                                        });
+                                    }
+                                }
+                            });
+                            harianCols.sort((a, b) => a.num - b.num);
+                            const harianCount = harianCols.length || 2;
+                            
+                            const targetYear = parsedYear || currentYear || "2024/2025";
+                            
+                            // Find or Create Class in database
+                            let classIdx = db.classes.findIndex(c => c.name.toLowerCase() === className.toLowerCase() && c.tahunAjaran === targetYear);
+                            
+                            let existingStudents = [];
+                            if (classIdx === -1) {
+                                const newClass = {
+                                    id: "cls_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5),
+                                    name: className,
+                                    tahunAjaran: targetYear,
+                                    students: [],
+                                    harianCount: harianCount,
+                                    isLocked: false,
+                                    ketuaId: null,
+                                    sched1: sheetSched1,
+                                    sched2: sheetSched2
+                                };
+                                db.classes.push(newClass);
+                                classIdx = db.classes.length - 1;
+                                newClasses.push(className);
+                            } else {
+                                // Update properties
+                                db.classes[classIdx].name = className; // Update name spelling/capitalization
+                                db.classes[classIdx].harianCount = harianCount;
+                                db.classes[classIdx].sched1 = sheetSched1 || db.classes[classIdx].sched1 || "";
+                                db.classes[classIdx].sched2 = sheetSched2 || db.classes[classIdx].sched2 || "";
+                                existingStudents = [...db.classes[classIdx].students];
+                                db.classes[classIdx].students = []; // Clear to rebuild/sync with Excel data
+                                db.classes[classIdx].ketuaId = null;
+                                updatedClasses.push(className);
+                            }
+                            
+                            const currentImportClass = db.classes[classIdx];
+                            
+                            // 5. Read students starting from row after headers
+                            let studentRowIndex = headerRowIndex + 1;
+                            while (studentRowIndex < json.length) {
+                                const sRow = json[studentRowIndex];
+                                if (!sRow || sRow.length === 0 || sRow[0] === undefined || sRow[0] === null || sRow[0] === '') {
+                                    break;
+                                }
+                                if (sRow[0] === 'KELAS') {
+                                    break;
+                                }
+                                
+                                const nis = String(sRow[nisCol] !== undefined ? sRow[nisCol] : '').trim();
+                                let nama = String(sRow[namaCol] !== undefined ? sRow[namaCol] : '').trim();
+                                let jk = String(sRow[jkCol] !== undefined ? sRow[jkCol] : '').trim().toUpperCase();
+                                
+                                if (nis && nama) {
+                                    let isKetua = false;
+                                    if (nama.includes('(👑)')) {
+                                        isKetua = true;
+                                        nama = nama.replace('(👑)', '').trim();
+                                    } else if (nama.includes('(👑 Ketua Kelas)')) {
+                                        isKetua = true;
+                                        nama = nama.replace('(👑 Ketua Kelas)', '').trim();
+                                    }
+                                    
+                                    if (jk.startsWith('L') || jk === 'LAKI-LAKI') {
+                                        jk = 'L';
+                                    } else if (jk.startsWith('P') || jk === 'PEREMPUAN') {
+                                        jk = 'P';
+                                    } else {
+                                        jk = 'L';
+                                    }
+                                    
+                                    const studentHarian = [];
+                                    for (let hIdx = 0; hIdx < harianCount; hIdx++) {
+                                        const colInfo = harianCols[hIdx];
+                                        if (colInfo) {
+                                            const scoreVal = sRow[colInfo.index];
+                                            studentHarian.push(scoreVal !== undefined && scoreVal !== null && scoreVal !== '' ? String(scoreVal).trim() : '');
+                                        } else {
+                                            studentHarian.push('');
+                                        }
+                                    }
+                                    
+                                    const utsVal = UTSCol !== -1 && sRow[UTSCol] !== undefined && sRow[UTSCol] !== null && sRow[UTSCol] !== '' ? String(sRow[UTSCol]).trim() : '';
+                                    const uasVal = UASCol !== -1 && sRow[UASCol] !== undefined && sRow[UASCol] !== null && sRow[UASCol] !== '' ? String(sRow[UASCol]).trim() : '';
+                                    const catatanVal = catatanCol !== -1 && sRow[catatanCol] !== undefined ? String(sRow[catatanCol]).trim() : '';
+                                    const seatVal = seatCol !== -1 && sRow[seatCol] !== undefined && sRow[seatCol] !== null && sRow[seatCol] !== '' ? String(sRow[seatCol]).trim() : '';
+                                    
+                                    let seatRow = null;
+                                    let seatColVal = null;
+                                    if (seatVal) {
+                                        const match = seatVal.match(/B?\s*(\d+)\s*[-,\s:K]*\s*K?\s*(\d+)/i);
+                                        if (match) {
+                                            seatRow = parseInt(match[1]);
+                                            seatColVal = parseInt(match[2]);
+                                        } else {
+                                            const parts = seatVal.split(/[^0-9]+/);
+                                            if (parts.length >= 2) {
+                                                seatRow = parseInt(parts[0]);
+                                                seatColVal = parseInt(parts[1]);
+                                            }
+                                        }
+                                    }
+                                    
+                                    const existingStudent = existingStudents.find(s => s.nis === nis);
+                                    if (existingStudent) {
+                                        updatedStudentsCount++;
+                                    } else {
+                                        newStudentsCount++;
+                                    }
+                                    const studentId = existingStudent ? existingStudent.id : ("s_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9));
+                                    
+                                    currentImportClass.students.push({
+                                        id: studentId,
+                                        nis: nis,
+                                        nama: nama,
+                                        jk: jk,
+                                        harian: studentHarian,
+                                        uts: utsVal,
+                                        uas: uasVal,
+                                        catatan: catatanVal,
+                                        seatRow: seatRow,
+                                        seatCol: seatColVal
+                                    });
+                                    
+                                    if (isKetua) {
+                                        currentImportClass.ketuaId = studentId;
+                                    }
+                                }
+                                
+                                studentRowIndex++;
+                            }
+                        });
+                        
+                        if (newClasses.length > 0 || updatedClasses.length > 0) {
+                            saveDB();
+                            
+                            // Try to reload Year and Class Dropdowns
+                            const finalYear = parsedYear || currentYear || "2024/2025";
+                            currentYear = finalYear;
+                            const firstClassOfTargetYear = db.classes.find(c => c.tahunAjaran === finalYear);
+                            if (firstClassOfTargetYear) {
+                                currentClassId = firstClassOfTargetYear.id;
+                            }
+                            
+                            loadYearDropdown();
+                            
+                            let msg = `Hasil Impor/Sinkronisasi Rekap Kelas (Tahun Ajaran ${finalYear}):\n\n`;
+                            if (newClasses.length > 0) {
+                                msg += `• ${newClasses.length} Kelas Baru Dibuat:\n  - ${newClasses.join('\n  - ')}\n\n`;
+                            }
+                            if (updatedClasses.length > 0) {
+                                msg += `• ${updatedClasses.length} Kelas Diperbarui:\n  - ${updatedClasses.join('\n  - ')}\n\n`;
+                            }
+                            msg += `• Siswa Baru Ditambahkan: ${newStudentsCount} anak\n`;
+                            msg += `• Nilai/Data Siswa Diperbarui: ${updatedStudentsCount} anak\n`;
+                            
+                            alert(msg);
+                        } else {
+                            alert("Format Rekap Kelas terdeteksi, tetapi tidak ada data kelas/siswa yang berhasil diproses.");
+                        }
+                        
+                    } else {
+                        // Standard Import: import/update into the CURRENT ACTIVE CLASS
+                        if (currentClassIndex === -1) {
+                            alert("Silakan pilih kelas terlebih dahulu untuk mengimpor daftar siswa.");
+                            return;
+                        }
+                        
+                        const currentClass = db.classes[currentClassIndex];
+                        let importCount = 0;
+                        let updateCount = 0;
+                        
+                        recordState();
+                        
+                        // Find header row or use index 1 if not found
+                        let startRowIndex = 1;
+                        let nisColIdx = 0;
+                        let namaColIdx = 1;
+                        let jkColIdx = 2;
+                        let seatColIdx = -1;
+                        
+                        for (let r = 0; r < Math.min(firstJson.length, 5); r++) {
+                            const possibleHeader = firstJson[r];
+                            if (possibleHeader && possibleHeader.some(cell => typeof cell === 'string' && (cell.toLowerCase().includes('nis') || cell.toLowerCase().includes('nama')))) {
+                                startRowIndex = r + 1;
+                                possibleHeader.forEach((cellVal, colIdx) => {
+                                    if (typeof cellVal === 'string') {
+                                        const valLower = cellVal.toLowerCase();
+                                        if (valLower.includes('nis')) nisColIdx = colIdx;
+                                        else if (valLower.includes('nama')) namaColIdx = colIdx;
+                                        else if (valLower.includes('kelamin') || valLower.includes('jk') || valLower === 'l/p') jkColIdx = colIdx;
+                                        else if (valLower.includes('duduk') || valLower.includes('seat') || valLower.includes('koordinat')) seatColIdx = colIdx;
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                        
+                        for (let i = startRowIndex; i < firstJson.length; i++) {
+                            const row = firstJson[i];
+                            if (!row || row.length === 0) continue;
+                            
+                            const nis = String(row[nisColIdx] !== undefined ? row[nisColIdx] : '').trim();
+                            const nama = String(row[namaColIdx] !== undefined ? row[namaColIdx] : '').trim();
+                            let jk = String(row[jkColIdx] !== undefined ? row[jkColIdx] : '').trim().toUpperCase();
+                            
+                            if (!nis || !nama) continue;
+                            
+                            const nisLower = nis.toLowerCase();
+                            const namaLower = nama.toLowerCase();
+                            if (nisLower === 'nis' || 
+                                nisLower.includes('template') || 
+                                nisLower.includes('petunjuk') ||
+                                namaLower.includes('nama lengkap') ||
+                                namaLower.includes('nama murid') ||
+                                namaLower.startsWith('contoh:') ||
+                                namaLower.includes('contoh')) {
+                                continue;
+                            }
+                            
+                            if (jk.startsWith('L') || jk === 'LAKI-LAKI') {
+                                jk = 'L';
+                            } else if (jk.startsWith('P') || jk === 'PEREMPUAN') {
+                                jk = 'P';
+                            } else {
+                                jk = 'L';
+                            }
+                            
+                            const seatVal = seatColIdx !== -1 && row[seatColIdx] !== undefined && row[seatColIdx] !== null && row[seatColIdx] !== '' ? String(row[seatColIdx]).trim() : '';
+                            let seatRow = null;
+                            let seatColVal = null;
+                            if (seatVal) {
+                                const match = seatVal.match(/B?\s*(\d+)\s*[-,\s:K]*\s*K?\s*(\d+)/i);
+                                if (match) {
+                                    seatRow = parseInt(match[1]);
+                                    seatColVal = parseInt(match[2]);
+                                } else {
+                                    const parts = seatVal.split(/[^0-9]+/);
+                                    if (parts.length >= 2) {
+                                        seatRow = parseInt(parts[0]);
+                                        seatColVal = parseInt(parts[1]);
+                                    }
+                                }
+                            }
+                            
+                            const existingStudent = currentClass.students.find(s => s.nis === nis);
+                            if (existingStudent) {
+                                existingStudent.nama = nama;
+                                existingStudent.jk = jk;
+                                existingStudent.seatRow = seatRow;
+                                existingStudent.seatCol = seatColVal;
+                                updateCount++;
+                            } else {
+                                currentClass.students.push({
+                                    id: "s_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9),
+                                    nis: nis,
+                                    nama: nama,
+                                    jk: jk,
+                                    harian: Array(currentClass.harianCount).fill(''),
+                                    uts: '',
+                                    uas: '',
+                                    catatan: '',
+                                    seatRow: seatRow,
+                                    seatCol: seatColVal
+                                });
+                                importCount++;
+                            }
+                        }
+                        
                         saveDB();
                         renderTable();
-                        alert(`Berhasil mengimpor ${importCount} siswa.`);
-                    } else {
-                        alert("Tidak ada siswa baru yang berhasil diimpor (mungkin sudah ada di database).");
+                        
+                        let msg = `Hasil Impor Roster Murid (${currentClass.name}):\n\n`;
+                        msg += `• Murid Baru Ditambahkan: ${importCount} anak\n`;
+                        msg += `• Murid Diperbarui/Sinkron: ${updateCount} anak\n`;
+                        alert(msg);
                     }
-
-                    // Reset and close
+                    
                     modalImport.classList.add('hidden');
                     modalImport.classList.remove('flex');
                     inputImportFile.value = '';
-
+                    
                 } catch (err) {
                     console.error(err);
                     alert("Gagal membaca file. Pastikan format file sesuai.");
                 }
             };
-
+            
             reader.readAsArrayBuffer(file);
         });
     }
@@ -1989,14 +3126,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rowClass = isRemedial ? 'class="red-row"' : '';
                 const ketText = isRemedial ? 'REMEDIAL' : (hasScore ? 'TUNTAS' : '-');
                 
-                const isKetua = (currentClass.ketuaId === student.id);
-                const ketuaLabel = isKetua ? ' <strong>(👑 Ketua Kelas)</strong>' : '';
-                
                 printHTML += `
                     <tr ${rowClass}>
                         <td class="center">${index + 1}</td>
                         <td class="center">${student.nis}</td>
-                        <td>${student.nama}${ketuaLabel}</td>
+                        <td>${student.nama}</td>
                         <td class="center">${student.jk || '-'}</td>
                         <td class="center">${countHarian > 0 ? avgHarian.toFixed(1) : '-'}</td>
                         <td class="center">${student.uts !== null && student.uts !== '' ? student.uts : '-'}</td>
